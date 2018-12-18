@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">Movies Kotlin</string>
+
+    <string name="action_refresh">Refresh</string>
+
+    <string name="failure_network_connection">No Network Connection.</string>
+    <string name="failure_server_error">Server Error</string>
+    <string name="failure_movies_list_unavailable">Movies Unavailable.</string>
+    <string name="failure_movie_non_existent">Movie Not Existent.</string>
+    <string name="start">EMPEZAR</string>
+    <string name="did_you_have_a_crash">¿Tuviste un accidente?</string>
+    <string name="is_any_injured">¿Hubo algún herido?</string>
+    <string name="yes">SI</string>
+    <string name="no">NO</string>
+    <string name="ambulance_phonenumber">131</string>
+    <string name="police_phonenumber">133</string>
+    <string name="firedepartment_phonenumber">132</string>
+    <string name="call_an_ambulance">Llamar a SAMU</string>
+    <string name="call_police">Llamar a Carabineros</string>
+    <string name="call_fire_department">Llamar a Bomberos</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps2">Map</string>
+    <string name="where_did_the_crash_ocurre">¿En dónde ocurrieron los hechos?</string>
+    <string name="next">CONTINUAR</string>
+    <string name="thirdpartyinformation">Third Patry Information</string>
+    <string name="add_thirdparty_information">Identifica a las personas involucradas</string>
+    <string name="name">Nombre</string>
+    <string name="names">Nombres</string>
+    <string name="surnames">Apellidos</string>
+    <string name="brand">Marca</string>
+    <string name="model">Modelo</string>
+    <string name="vehicle_involved">Identifica el vehiculo involucrado</string>
+    <string name="year">Año</string>
+    <string name="color">Color</string>
+    <string name="add_your_info">Agrega tus datos personales</string>
+    <string name="add_your_car_info">Agrega los datos de tu vehiculo</string>
+
+    <string-array name="has_protection">
+        <item>¿Posee seguro automotriz?</item>
+        <item>Si</item>
+        <item>No</item>
+    </string-array>
+</resources>

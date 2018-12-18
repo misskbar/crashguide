@@ -1,0 +1,330 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/scrim">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="10dp"
+        android:background="@mipmap/shadow"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/add_thirdparty_information"
+            android:textColor="@color/black" />
+
+
+        <LinearLayout
+            android:id="@+id/qrLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/imageView3"
+                android:layout_width="60sp"
+                android:layout_height="60sp"
+                android:layout_gravity="center"
+                app:srcCompat="@mipmap/qrexample" />
+
+            <TextView
+                android:id="@+id/label2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="10dp"
+                android:text="Si posee la aplicacion escanea su QR y no llenes el formulario"
+                android:textColor="@color/black"
+                android:textSize="10sp" />
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/divider" />
+
+        <LinearLayout
+            android:id="@+id/form"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/firstName"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="@string/names"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/surname"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="@string/surnames"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/rut"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="RUT"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/telefono"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="Telefono"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="Correo electronico"
+                android:imeOptions="actionNext"
+                android:inputType="textEmailAddress"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:entries="@array/has_protection"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/idCapture"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/photo_height"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/edittext"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@mipmap/id_card_licence"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Agrega una foto de su carnet"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/driverLicenceCapture"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/photo_height"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="0dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@mipmap/driver_licence_icon"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Agrega una foto de su licencia de conducir"
+                    android:textColor="@color/black"
+                    android:textSize="13sp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="fill_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:background="@color/divider" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="@string/vehicle_involved"
+            android:textColor="@color/black" />
+
+        <LinearLayout
+            android:id="@+id/formVehicle"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="20dp"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/brand"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="@string/brand"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/model"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="@string/model"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/registrationNumber"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="Patente"
+                android:imeOptions="actionNext"
+                android:inputType="textPersonName"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/year"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="Año"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+            <EditText
+                android:id="@+id/color"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginBottom="10dp"
+                android:background="@drawable/edittext"
+                android:hint="@string/color"
+                android:imeOptions="actionNext"
+                android:inputType="phone"
+                android:paddingLeft="10dp"
+                android:textColor="@color/black"
+                android:textColorHint="#a6a6a6"
+                android:textSize="13sp" />
+
+
+        </LinearLayout>
+
+
+
+        <Button
+            android:id="@+id/nextButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/form"
+            android:layout_marginBottom="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="@drawable/button"
+            android:clickable="true"
+            android:text="@string/next"
+            android:textColor="@color/white" />
+        <!--</RelativeLayout>-->
+    </LinearLayout>
+</ScrollView>
