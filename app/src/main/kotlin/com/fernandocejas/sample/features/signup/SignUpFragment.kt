@@ -26,6 +26,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.view.WindowManager
 import android.widget.ImageView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
@@ -100,7 +101,8 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
         driverLicenceCapture.setOnClickListener(this)
         idCapture.setOnClickListener(this)
 
-
+        getActivity()!!.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         nextButton.setOnClickListener(this)
     }
 
