@@ -21,11 +21,13 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.widget.ArrayAdapter
 import android.widget.ImageView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
@@ -95,6 +97,9 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val res: Resources = resources
+        val hasProtection = res.getStringArray(R.array.has_protection)
+        spinner.adapter = ArrayAdapter(activity, R.layout.spinner_item, hasProtection)
         driverLicenceCapture.setOnClickListener(this)
         idCapture.setOnClickListener(this)
     }
