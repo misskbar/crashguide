@@ -21,6 +21,7 @@ import android.app.Activity
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.content.res.Resources
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -38,6 +39,9 @@ import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_third_party_information.*
 import java.io.File
 import javax.inject.Inject
+import android.widget.ArrayAdapter
+
+
 
 class SignUpFragment : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
@@ -100,7 +104,9 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
 
         driverLicenceCapture.setOnClickListener(this)
         idCapture.setOnClickListener(this)
-
+        val res: Resources = resources
+        val hasProtection = res.getStringArray(R.array.has_protection)
+        spinner.adapter = ArrayAdapter(activity, R.layout.spinner_item, hasProtection)
         getActivity()!!.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         nextButton.setOnClickListener(this)

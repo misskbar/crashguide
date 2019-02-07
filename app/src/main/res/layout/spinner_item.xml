@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_marginBottom="10dp"
-    android:textColor="@color/black"
-    android:textSize="13sp"
-    android:background="@color/white_smoke"
-    android:gravity="center_vertical"
-    android:id="@+id/spinnerItem"
-    android:layout_width="match_parent"
-    android:layout_height="40dp"
-    android:paddingLeft="10dp"
-    android:text="TextView" />
+    <TextView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_marginBottom="10dp"
+        android:textColor="@color/black"
+        android:textSize="13sp"
+        android:background="@color/white_smoke"
+        android:gravity="center_vertical"
+        android:id="@+id/spinnerItem"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:paddingLeft="10dp"
+        android:text="TextView" />
