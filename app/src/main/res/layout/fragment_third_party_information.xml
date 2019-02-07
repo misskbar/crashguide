@@ -204,7 +204,8 @@
                     android:layout_centerHorizontal="true"
                     android:text="Agrega una foto de su licencia de conducir"
                     android:textColor="@color/black"
-                    android:textSize="13sp" />
+                    android:textSize="13sp"
+                    android:paddingBottom="50dp" />
 
             </RelativeLayout>
 
