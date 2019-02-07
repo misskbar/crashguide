@@ -27,6 +27,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
 import android.view.View
+import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.ImageView
 import com.facebook.drawee.backends.pipeline.Fresco
@@ -100,6 +101,8 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         val res: Resources = resources
         val hasProtection = res.getStringArray(R.array.has_protection)
         spinner.adapter = ArrayAdapter(activity, R.layout.spinner_item, hasProtection)
+        getActivity()!!.getWindow().setSoftInputMode(
+                WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         driverLicenceCapture.setOnClickListener(this)
         idCapture.setOnClickListener(this)
     }
