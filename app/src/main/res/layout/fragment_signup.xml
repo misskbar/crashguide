@@ -267,7 +267,7 @@
                 android:background="@drawable/edittext"
                 android:hint="@string/color"
                 android:imeOptions="actionNext"
-                android:inputType="phone"
+                android:inputType="textPersonName"
                 android:paddingLeft="10dp"
                 android:textColor="@color/black"
                 android:textColorHint="#a6a6a6"

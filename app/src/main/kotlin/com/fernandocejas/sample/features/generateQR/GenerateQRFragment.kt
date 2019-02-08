@@ -28,9 +28,11 @@ import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
+import android.widget.Toast
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.common.ResizeOptions
@@ -67,7 +69,10 @@ class GenerateQRFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        var sigUpData = (activity as GenerateQRActivity ).getSingUpData()
+        val data = sigUpData.split(";")
+        val idCapture = data[6]
+        Base64.decode(idCapture,Base64.DEFAULT)
         var bitmap = TextToImageEncode("Pepe motherfucker")
         qrBarcode.setImageBitmap(bitmap)
     }

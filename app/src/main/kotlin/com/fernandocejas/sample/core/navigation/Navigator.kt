@@ -70,6 +70,12 @@ class Navigator
 
     fun generateQR(context: Context) = context.startActivity(GenerateQRActivity.callingIntent(context))
 
+    fun generateQR(context: Context, extra: String) {
+
+        context.startActivity(GenerateQRActivity.callingIntent(context,extra))
+
+    }
+
     private fun showMovies(context: Context) = context.startActivity(MoviesActivity.callingIntent(context))
 
     fun showMovieDetails(activity: FragmentActivity, movie: MovieView, navigationExtras: Extras) {
