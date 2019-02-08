@@ -43,7 +43,10 @@ class InjuredFragment : BaseFragment() {
         ambulanceLogo.setOnClickListener(View.OnClickListener { v ->  navigator.dialPhoneNumber(activity!!,getString(R.string.ambulance_phonenumber))})
         policeLogo.setOnClickListener(View.OnClickListener { v ->  navigator.dialPhoneNumber(activity!!,getString(R.string.police_phonenumber))})
         firemanLogo.setOnClickListener(View.OnClickListener { v ->  navigator.dialPhoneNumber(activity!!,getString(R.string.firedepartment_phonenumber))})
+        showMapButton.setOnClickListener(View.OnClickListener { v ->  navigator.showMap(activity!!)})
+
 
     }
 
 }
+
