@@ -17,11 +17,34 @@ package com.fernandocejas.sample.features.generateQR
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
+import android.widget.Toast
 import com.fernandocejas.sample.core.platform.BaseActivity
 
 class GenerateQRActivity : BaseActivity() {
+
+    var datasingUpData: String = "";
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        datasingUpData = intent.getStringExtra(SING_UP_DATA)
+                ?: throw IllegalStateException("field $SING_UP_DATA missing in Intent")
+    }
+
+    public fun getSingUpData() = datasingUpData
+
     companion object {
+
+        private val SING_UP_DATA = "user_id"
+
         fun callingIntent(context: Context) = Intent(context, GenerateQRActivity::class.java)
+
+        fun callingIntent(context: Context, extra: String): Intent{
+            val intent = Intent(context, GenerateQRActivity::class.java)
+            intent.putExtra(SING_UP_DATA, extra)
+            return intent
+        }
     }
 
     override fun fragment() = GenerateQRFragment()

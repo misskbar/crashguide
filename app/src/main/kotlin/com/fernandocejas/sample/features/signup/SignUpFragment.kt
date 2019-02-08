@@ -22,13 +22,17 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
+import android.util.Base64
 import android.view.View
 import android.view.WindowManager
 import android.widget.ImageView
+import android.widget.Toast
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.common.ResizeOptions
@@ -40,6 +44,13 @@ import kotlinx.android.synthetic.main.fragment_third_party_information.*
 import java.io.File
 import javax.inject.Inject
 import android.widget.ArrayAdapter
+import com.facebook.binaryresource.FileBinaryResource
+import com.facebook.imagepipeline.core.ImagePipelineFactory
+import com.facebook.binaryresource.BinaryResource
+import com.facebook.imagepipeline.cache.DefaultCacheKeyFactory
+import com.facebook.cache.common.CacheKey
+import com.facebook.imagepipeline.request.ImageRequest
+import java.io.ByteArrayOutputStream
 
 
 
@@ -74,13 +85,16 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
 
             }
         }else if (v.id == nextButton.id) {
-
-            navigator.generateQR(activity!!)
+//            getData()
+            navigator.generateQR(activity!!, getData())
         }
     }
 
     private val CAMERA_REQUEST_CODE = 102
     private var mCurrentPhotoPath: String = ""
+    private var idPath: String = ""
+    private var driverLicencePath: String = ""
+
     private lateinit var button: View
 
     @Inject
@@ -133,6 +147,25 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
+    private fun getData() : String{
+        var data: String = ""
+        data = data.plus(firstName.text).plus(";").plus(surname.text).plus(";")
+                .plus(rut.text).plus(";").plus(telefono.text).plus(";")
+                .plus(email.text).plus(";").plus(spinner.selectedItem).plus(";")
+                .plus(idPath).plus(";").plus(driverLicencePath).plus(";")
+                .plus(brand.text).plus(";").plus(model.text).plus(";")
+                .plus(registrationNumber.text).plus(";").plus(year.text).plus(";")
+                .plus(color.text).plus(";")
+
+//        Toast.makeText(activity, "el extra es: $data", Toast.LENGTH_LONG).show()
+        return data
+    }
+
+    private fun getPhotoBase64(): String{
+        idCapture.controller.toString()
+        return ""
+    }
+
     private fun launchCamera() {
         val values = ContentValues(1)
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
@@ -156,9 +189,14 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
         cursor.moveToFirst()
         val photoPath = cursor.getString(0)
         cursor.close()
-        val file = File(photoPath)
-        val uri = Uri.fromFile(file)
 
+
+        encodeImage(photoPath, view.id)
+
+
+        val file = File(photoPath)
+
+        val uri = Uri.fromFile(file)
         val height = resources.getDimensionPixelSize(R.dimen.photo_height)
         val width = resources.getDimensionPixelSize(R.dimen.photo_width)
 
@@ -170,6 +208,22 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
                 .setImageRequest(request)
                 .build()
         view.controller = controller
+    }
+
+     private fun encodeImage( photoPath: String, id: Int) {
+         var s = photoPath
+         println("photoPath $s")
+        var  bm: Bitmap = BitmapFactory.decodeFile(photoPath.toString())
+        var baos: ByteArrayOutputStream = ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+        var b = baos.toByteArray()
+         val encodedImage = Base64.encodeToString(b, Base64.DEFAULT)
+         if (id == idCapture.id) {
+             idPath = encodedImage
+         }else {
+             driverLicencePath = encodedImage
+         }
+
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
