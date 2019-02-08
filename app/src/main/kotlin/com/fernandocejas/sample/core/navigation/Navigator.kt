@@ -68,6 +68,7 @@ class Navigator
 
     fun showSignUp(context: Context) = context.startActivity(SignUpActivity.callingIntent(context))
 
+
     fun generateQR(context: Context) = context.startActivity(GenerateQRActivity.callingIntent(context))
 
     fun generateQR(context: Context, extra: String) {

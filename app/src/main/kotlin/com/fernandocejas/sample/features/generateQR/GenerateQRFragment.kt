@@ -53,7 +53,14 @@ import java.io.IOException
 import java.util.*
 import javax.inject.Inject
 
-class GenerateQRFragment : BaseFragment() {
+class GenerateQRFragment : BaseFragment(), View.OnClickListener {
+    override fun onClick(v: View?) {
+        if (v!!.id == homeButton.id) {
+
+            navigator.showMain(activity!!)
+
+        }
+    }
 
     @Inject
     lateinit var navigator: Navigator
@@ -69,6 +76,9 @@ class GenerateQRFragment : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        homeButton.setOnClickListener(this)
+
         var sigUpData = (activity as GenerateQRActivity ).getSingUpData()
         val data = sigUpData.split(";")
         val idCapture = data[6]
