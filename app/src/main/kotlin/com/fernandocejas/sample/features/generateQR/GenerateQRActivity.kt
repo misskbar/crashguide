@@ -41,8 +41,11 @@ class GenerateQRActivity : BaseActivity() {
         fun callingIntent(context: Context) = Intent(context, GenerateQRActivity::class.java)
 
         fun callingIntent(context: Context, extra: String): Intent{
+            println("GenerateQRActivity inicia el metodo callingIntent")
             val intent = Intent(context, GenerateQRActivity::class.java)
+            println("GenerateQRActivity creo el inten")
             intent.putExtra(SING_UP_DATA, extra)
+            println("GenerateQRActivity coloca el extra")
             return intent
         }
     }

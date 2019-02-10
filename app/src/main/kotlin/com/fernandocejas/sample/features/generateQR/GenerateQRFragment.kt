@@ -22,6 +22,7 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.media.MediaScannerConnection
 import android.net.Uri
 import android.os.Bundle
@@ -79,12 +80,17 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
 
         homeButton.setOnClickListener(this)
 
-        var sigUpData = (activity as GenerateQRActivity ).getSingUpData()
-        val data = sigUpData.split(";")
+        var singUpData = (activity as GenerateQRActivity ).getSingUpData()
+        val data = singUpData.split(";")
         val idCapture = data[6]
-        Base64.decode(idCapture,Base64.DEFAULT)
-        var bitmap = TextToImageEncode("Pepe motherfucker")
+        println("la data es $singUpData")
+        var bitmap = TextToImageEncode(singUpData)
         qrBarcode.setImageBitmap(bitmap)
+    }
+
+    fun decodeImage(image: String){
+        val imageBytes = Base64.decode(image,Base64.DEFAULT)
+        val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
     }
 
     fun saveImage(myBitmap: Bitmap?): String {
