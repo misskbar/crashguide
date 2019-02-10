@@ -161,10 +161,6 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
         return data
     }
 
-    private fun getPhotoBase64(): String{
-        idCapture.controller.toString()
-        return ""
-    }
 
     private fun launchCamera() {
         val values = ContentValues(1)
@@ -211,9 +207,10 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
     }
 
      private fun encodeImage( photoPath: String, id: Int) {
-         var s = photoPath
-         println("photoPath $s")
         var  bm: Bitmap = BitmapFactory.decodeFile(photoPath.toString())
+         val height = 200
+         val width = 300
+         bm = Bitmap.createScaledBitmap(bm, width, height, true)
         var baos: ByteArrayOutputStream = ByteArrayOutputStream();
         bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
         var b = baos.toByteArray()
