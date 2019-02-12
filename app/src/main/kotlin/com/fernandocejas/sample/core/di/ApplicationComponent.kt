@@ -27,6 +27,7 @@ import com.fernandocejas.sample.features.onboarding.OnBoardingFragment
 import com.fernandocejas.sample.features.pointinmap.MapFragment
 import com.fernandocejas.sample.features.signup.SignUpFragment
 import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyFragment
+import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyListFragment
 import dagger.Component
 import javax.inject.Singleton
 
@@ -51,5 +52,7 @@ interface ApplicationComponent {
     fun inject (signUpFragment: SignUpFragment)
 
     fun inject (generateQRFragment: GenerateQRFragment)
+
+    fun inject (ThirdPartyListFragment: ThirdPartyListFragment)
 
 }

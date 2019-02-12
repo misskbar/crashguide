@@ -22,26 +22,37 @@ import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Resources
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
 import android.support.v4.content.ContextCompat
+import android.util.Base64
 import android.view.View
 import android.view.WindowManager
 import android.widget.ArrayAdapter
 import android.widget.ImageView
+import android.widget.Toast
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.request.ImageRequestBuilder
+import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.R
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_third_party_information.*
+import java.io.ByteArrayOutputStream
 import java.io.File
 import javax.inject.Inject
 
 class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
+
+
+    private var idPath: String = ""
+    private var driverLicencePath: String = ""
+
     override fun onClick(v: View?) {
 
         if (v!!.id == driverLicenceCapture.id) {
@@ -71,6 +82,11 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
                 requestPermission()
 
             }
+        }else if (v.id == nextButton.id) {
+            Toast.makeText(activity!!,"probando boron",Toast.LENGTH_LONG)
+             saveThirdPartyInformation()
+            println("el tamano es ${AndroidApplication.globalListTerceros.size}")
+             navigator.showThirdPartyList(activity!!)
         }
     }
 
@@ -105,6 +121,7 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         driverLicenceCapture.setOnClickListener(this)
         idCapture.setOnClickListener(this)
+        nextButton.setOnClickListener(this)
     }
 
     private fun requestPermission() {
@@ -128,6 +145,35 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         }
     }
 
+    private fun saveThirdPartyInformation(){
+        var vehiculo = Vehiculo(brand.text.toString(),model.text.toString(),
+                registrationNumber.text.toString(),year.text.toString().toInt(),
+                color.text.toString())
+
+        var terceros = Terceros(firstName.text.toString(),surname.text.toString(),
+                rut.text.toString(),telefono.text.toString().toInt(),email.text.toString(),
+                spinner.selectedItem.toString(),idPath,driverLicencePath,vehiculo)
+
+        AndroidApplication.globalListTerceros.add(terceros)
+
+    }
+
+    private fun encodeImage( photoPath: String, id: Int) {
+        var  bm: Bitmap = BitmapFactory.decodeFile(photoPath.toString())
+        val height = 200
+        val width = 300
+        bm = Bitmap.createScaledBitmap(bm, width, height, true)
+        var baos: ByteArrayOutputStream = ByteArrayOutputStream();
+        bm.compress(Bitmap.CompressFormat.JPEG, 100, baos); //bm is the bitmap object
+        var b = baos.toByteArray()
+        val encodedImage = Base64.encodeToString(b, Base64.DEFAULT)
+        if (id == idCapture.id) {
+            idPath = encodedImage
+        }else {
+            driverLicencePath = encodedImage
+        }
+
+    }
     private fun launchCamera() {
         val values = ContentValues(1)
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")
@@ -151,6 +197,11 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         cursor.moveToFirst()
         val photoPath = cursor.getString(0)
         cursor.close()
+
+
+        encodeImage(photoPath, view.id)
+
+
         val file = File(photoPath)
         val uri = Uri.fromFile(file)
 

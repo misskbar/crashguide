@@ -20,9 +20,16 @@ import com.facebook.drawee.backends.pipeline.Fresco
 import com.fernandocejas.sample.core.di.ApplicationComponent
 import com.fernandocejas.sample.core.di.ApplicationModule
 import com.fernandocejas.sample.core.di.DaggerApplicationComponent
+import com.fernandocejas.sample.features.thridpartyinformation.Terceros
 import com.squareup.leakcanary.LeakCanary
 
 class AndroidApplication : Application() {
+
+//    var globalListTerceros: ArrayList<Terceros> = ArrayList<Terceros>()
+
+    companion object {
+        val globalListTerceros: ArrayList<Terceros> = ArrayList<Terceros>()
+    }
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {
         DaggerApplicationComponent

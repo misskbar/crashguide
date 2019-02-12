@@ -36,6 +36,7 @@ import com.fernandocejas.sample.features.onboarding.OnBoardingActivity
 import com.fernandocejas.sample.features.pointinmap.MapActivity
 import com.fernandocejas.sample.features.signup.SignUpActivity
 import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyActivity
+import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyListActivity
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -68,6 +69,7 @@ class Navigator
 
     fun showSignUp(context: Context) = context.startActivity(SignUpActivity.callingIntent(context))
 
+    fun showThirdPartyList(context: Context) = context.startActivity(ThirdPartyListActivity.callingIntent(context))
 
     fun generateQR(context: Context) = context.startActivity(GenerateQRActivity.callingIntent(context))
 
