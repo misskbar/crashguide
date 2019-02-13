@@ -44,7 +44,7 @@
             fab:fab_colorNormal="?attr/colorAccent"
             fab:fab_icon="@android:drawable/ic_menu_camera"
             fab:fab_size="mini"
-            fab:fab_title="Buscar" />
+            fab:fab_title="@string/textFABQR" />
 
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabWrite"
@@ -53,7 +53,7 @@
             fab:fab_colorNormal="?attr/colorAccent"
             fab:fab_icon="@android:drawable/ic_menu_edit"
             fab:fab_size="mini"
-            fab:fab_title="Añadir a la cesta" />
+            fab:fab_title="@string/textFABWrite" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 

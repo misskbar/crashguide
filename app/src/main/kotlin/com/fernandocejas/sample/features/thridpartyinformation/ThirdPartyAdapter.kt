@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.fernandocejas.sample.R
 import kotlinx.android.synthetic.main.third_party_item.view.*
 
@@ -23,6 +24,17 @@ class ThirdPartyAdapter (val items : ArrayList<Terceros>, val context: Context) 
         holder.thirdPartyBrand?.text = items.get(position).vehiculo.marca
         holder.thirdPartyModel?.text = items.get(position).vehiculo.modelo
         holder.thirdPartyPatent?.text = items.get(position).vehiculo.patente
+
+        holder.editThird.setOnClickListener( View.OnClickListener {
+            println("probando el editar en la posicion $position")
+        })
+
+        holder.deleteThird.setOnClickListener( View.OnClickListener {
+            items.remove(items.get(position))
+            notifyItemRemoved(position)
+            notifyItemRangeChanged(position, items.size)
+        })
+
     }
 }
 
@@ -33,4 +45,7 @@ class ViewHolder (view: View) : RecyclerView.ViewHolder(view) {
     val thirdPartyBrand = view.thirdPartyBrand
     val thirdPartyModel = view.thirdPartyModel
     val thirdPartyPatent = view.thirdPartyPatent
+
+    val editThird = view.editThird
+    val deleteThird = view.deleteThird
 }
