@@ -86,6 +86,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleLi
         val geocoder = Geocoder(context, Locale.getDefault())
         if (geocoder.getFromLocation(center.latitude, center.longitude, 1).size > 0)
             address.setText(geocoder.getFromLocation(center.latitude, center.longitude, 1)[0].getAddressLine(0).toString().split(",")[0])
+        address.dismissDropDown()
 
     }
 
@@ -207,6 +208,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleLi
                     val geocoder = Geocoder(context, Locale.getDefault())
                     if (geocoder.getFromLocation(latitude, longitude, 1).size > 0) {
                         address.setText(geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0).toString().split(",")[0])
+                        address.dismissDropDown()
                     }
                 }
             }
