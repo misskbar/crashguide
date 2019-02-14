@@ -17,11 +17,25 @@ package com.fernandocejas.sample.features.thridpartyinformation
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import com.fernandocejas.sample.core.platform.BaseActivity
 
 class ThirdPartyActivity : BaseActivity() {
+
+    var idThird: String = "";
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        if (intent.getStringExtra("third_id") != null)
+            idThird = intent!!.getStringExtra("third_id")
+    }
+
+    public fun getThirdID() = idThird
+
     companion object {
         fun callingIntent(context: Context) = Intent(context, ThirdPartyActivity::class.java)
+
     }
 
     override fun fragment() = ThirdPartyFragment()

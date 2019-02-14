@@ -83,9 +83,7 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
 
             }
         }else if (v.id == nextButton.id) {
-            Toast.makeText(activity!!,"probando boron",Toast.LENGTH_LONG)
              saveThirdPartyInformation()
-            println("el tamano es ${AndroidApplication.globalListTerceros.size}")
              navigator.showThirdPartyList(activity!!)
         }
     }
@@ -97,6 +95,8 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
 
     @Inject
     lateinit var navigator: Navigator
+
+    var idThird = ""
 
     override fun layoutId() = R.layout.fragment_third_party_information
 
@@ -113,7 +113,7 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        idThird = (activity as ThirdPartyActivity ).getThirdID();
         val res: Resources = resources
         val hasProtection = res.getStringArray(R.array.has_protection)
         spinner.adapter = ArrayAdapter(activity, R.layout.spinner_item, hasProtection)
@@ -122,8 +122,41 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         driverLicenceCapture.setOnClickListener(this)
         idCapture.setOnClickListener(this)
         nextButton.setOnClickListener(this)
+        if(!idThird.isEmpty()){
+            nextButton.setText(getString(R.string.modify))
+            setDataThird(idThird.toInt())
+        }
     }
 
+    private fun setDataThird(position: Int){
+        var data = AndroidApplication.globalListTerceros.get(position)
+
+        firstName.setText(data.nombres)
+        surname.setText(data.apellidos)
+        rut.setText(data.rut)
+        telefono.setText(data.telefono.toString())
+        email.setText(data.correo)
+
+        setSpinner(data.seguro)
+
+
+        idPath
+        driverLicencePath
+
+        brand.setText(data.vehiculo.marca)
+        model.setText(data.vehiculo.modelo)
+        registrationNumber.setText(data.vehiculo.patente)
+        year.setText(data.vehiculo.ano.toString())
+        color.setText(data.vehiculo.color)
+
+    }
+    private fun setSpinner(seguro : String) {
+        spinner.setSelection(1)
+        if(seguro.equals("Si")){
+        }else if(seguro.equals("No")) {
+            spinner.setSelection(2)
+        }
+    }
     private fun requestPermission() {
 
         requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
@@ -154,7 +187,13 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
                 rut.text.toString(),telefono.text.toString().toInt(),email.text.toString(),
                 spinner.selectedItem.toString(),idPath,driverLicencePath,vehiculo)
 
-        AndroidApplication.globalListTerceros.add(terceros)
+        //si idThird esta vacio se actualiza los datos del tercero sino agregar un tercero nu evo
+        if(!idThird.isEmpty()){
+            AndroidApplication.globalListTerceros.remove(AndroidApplication.globalListTerceros.get(idThird.toInt()))
+            AndroidApplication.globalListTerceros.add(terceros)
+        }else{
+            AndroidApplication.globalListTerceros.add(terceros)
+        }
 
     }
 
@@ -174,6 +213,12 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         }
 
     }
+
+    fun decodeImage(image: String){
+        val imageBytes = Base64.decode(image,Base64.DEFAULT)
+        val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
+    }
+
     private fun launchCamera() {
         val values = ContentValues(1)
         values.put(MediaStore.Images.Media.MIME_TYPE, "image/jpg")

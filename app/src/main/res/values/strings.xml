@@ -22,6 +22,7 @@
     <string name="title_activity_maps2">Map</string>
     <string name="where_did_the_crash_ocurre">¿En dónde ocurrieron los hechos?</string>
     <string name="next">CONTINUAR</string>
+    <string name="modify">MODIFICAR</string>
     <string name="thirdpartyinformation">Third Patry Information</string>
     <string name="add_thirdparty_information">Identifica a las personas involucradas</string>
     <string name="name">Nombre</string>

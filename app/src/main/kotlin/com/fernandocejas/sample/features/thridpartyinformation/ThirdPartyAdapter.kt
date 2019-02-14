@@ -1,15 +1,25 @@
 package com.fernandocejas.sample.features.thridpartyinformation
 
 import android.content.Context
+import android.content.Intent
+import android.support.v4.content.ContextCompat.startActivity
 import android.support.v7.widget.RecyclerView
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fernandocejas.sample.core.navigation.Navigator
 import android.widget.Toast
 import com.fernandocejas.sample.R
 import kotlinx.android.synthetic.main.third_party_item.view.*
+import javax.inject.Inject
 
 class ThirdPartyAdapter (val items : ArrayList<Terceros>, val context: Context) : RecyclerView.Adapter<ViewHolder>() {
+
+
+    @Inject
+    lateinit var navigator: Navigator
+
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(LayoutInflater.from(context).inflate(R.layout.third_party_item, parent, false))
     }
@@ -25,8 +35,11 @@ class ThirdPartyAdapter (val items : ArrayList<Terceros>, val context: Context) 
         holder.thirdPartyModel?.text = items.get(position).vehiculo.modelo
         holder.thirdPartyPatent?.text = items.get(position).vehiculo.patente
 
+
         holder.editThird.setOnClickListener( View.OnClickListener {
-            println("probando el editar en la posicion $position")
+            val intent =Intent(context, ThirdPartyActivity::class.java)
+            intent.putExtra("third_id", position.toString())
+            context.startActivity(intent)
         })
 
         holder.deleteThird.setOnClickListener( View.OnClickListener {
