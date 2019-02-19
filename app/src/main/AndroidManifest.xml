@@ -94,7 +94,8 @@
         <activity
             android:name=".features.pointinmap.MapActivity"
             android:label="@string/title_activity_maps" />
-        <activity android:name=".features.thridpartyinformation.ThirdPartyListActivity"></activity>
+        <activity android:name=".features.thridpartyinformation.ThirdPartyListActivity" />
+        <activity android:name=".features.thridpartyinformation.ScanQRActivity"></activity>
     </application>
 
 </manifest>

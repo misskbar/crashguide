@@ -39,7 +39,7 @@ class ThirdPartyListFragment : BaseFragment() {
         var explode = Explode()
         // Access the RecyclerView Adapter and load the data into it
         listaTerceros.adapter = ThirdPartyAdapter(AndroidApplication.globalListTerceros, activity!!)
-//        fabQR.setOnClickListener( View.OnClickListener { navigator.showThirdPartyInformation(activity!!) })
+        fabQR.setOnClickListener( View.OnClickListener { navigator.showScanQR(activity!!) })
         fabWrite.setOnClickListener( View.OnClickListener { navigator.showThirdPartyInformation(activity!!) })
     }
 

@@ -35,6 +35,7 @@ import com.fernandocejas.sample.features.onboarding.IsAnyInjuredActivity
 import com.fernandocejas.sample.features.onboarding.OnBoardingActivity
 import com.fernandocejas.sample.features.pointinmap.MapActivity
 import com.fernandocejas.sample.features.signup.SignUpActivity
+import com.fernandocejas.sample.features.thridpartyinformation.ScanQRActivity
 import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyActivity
 import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyListActivity
 import javax.inject.Inject
@@ -80,6 +81,8 @@ class Navigator
     }
 
     private fun showMovies(context: Context) = context.startActivity(MoviesActivity.callingIntent(context))
+
+    fun showScanQR(context: Context) = context.startActivity(ScanQRActivity.callingIntent(context))
 
     fun showMovieDetails(activity: FragmentActivity, movie: MovieView, navigationExtras: Extras) {
         val intent = MovieDetailsActivity.callingIntent(activity, movie)
