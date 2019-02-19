@@ -24,6 +24,7 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -31,9 +32,7 @@ import android.support.v4.content.ContextCompat
 import android.util.Base64
 import android.view.View
 import android.view.WindowManager
-import android.widget.ArrayAdapter
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.common.ResizeOptions
@@ -43,6 +42,7 @@ import com.fernandocejas.sample.R
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_third_party_information.*
+import kotlinx.android.synthetic.main.third_party_item.*
 import java.io.ByteArrayOutputStream
 import java.io.File
 import javax.inject.Inject
@@ -83,9 +83,48 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
 
             }
         }else if (v.id == nextButton.id) {
-             saveThirdPartyInformation()
-             navigator.showThirdPartyList(activity!!)
+            if(
+                    validateEmpty(firstName) && validateEmpty(surname) && validateEmpty(rut) &&
+                    validateEmpty(telefono) && validateEmpty(email) &&
+                    validateEmptySpinner(spinner) && validateEmptyPath(idPath, textIdCapture) &&
+                    validateEmptyPath(driverLicencePath, textDriverLicenceCapture) &&
+                    validateEmpty(brand) && validateEmpty(model) &&
+                    validateEmpty(registrationNumber) && validateEmpty(year) && validateEmpty(color)){
+                saveThirdPartyInformation()
+                navigator.showThirdPartyList(activity!!)
+            }
+
         }
+    }
+
+    private fun validateEmpty(editText: EditText): Boolean{
+        if(editText.text.isEmpty()){
+            editText.error = getString(R.string.error)
+            return false
+        }
+        return true
+    }
+
+    private fun validateEmptySpinner(spinner: Spinner): Boolean{
+        if(spinner.selectedItemPosition == 0){
+            val errorText = (spinner.selectedView as TextView)
+            errorText.error = ""
+            errorText.setTextColor(Color.RED)//just to highlight that this is an error
+            errorText.text = getString(R.string.error)//changes the selected item text to this
+            scrollView.scrollTo(0,spinner.bottom)
+            return false
+        }
+        return true
+    }
+
+    private fun validateEmptyPath(path : String,textView: TextView): Boolean{
+        if(path.isEmpty()){
+            textView.error = ""
+            textView.setTextColor(Color.RED)//just to highlight that this is an error
+            scrollView.scrollTo(0,textView.bottom)
+            return false
+        }
+        return true
     }
 
 
@@ -139,10 +178,17 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
 
         setSpinner(data.seguro)
 
+        if(!data.fotoCarnet.equals("")) {
+            textIdCapture.visibility = View.GONE
+            idPath = data.fotoCarnet
+            setImage(idCapture as SimpleDraweeView, data.fotoCarnet)
+        }
 
-        idPath
-        driverLicencePath
-
+        if(!data.fotoLicencia.equals("")) {
+            textDriverLicenceCapture.visibility = View.GONE
+            driverLicencePath = data.fotoLicencia
+            setImage(driverLicenceCapture as SimpleDraweeView, data.fotoLicencia)
+        }
         brand.setText(data.vehiculo.marca)
         model.setText(data.vehiculo.modelo)
         registrationNumber.setText(data.vehiculo.patente)
@@ -150,13 +196,31 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         color.setText(data.vehiculo.color)
 
     }
+
     private fun setSpinner(seguro : String) {
-        spinner.setSelection(1)
         if(seguro.equals("Si")){
+            spinner.setSelection(1)
         }else if(seguro.equals("No")) {
             spinner.setSelection(2)
         }
     }
+    private fun setImage(view: SimpleDraweeView, photoPath: String){
+        val file = File(photoPath)
+        val uri = Uri.fromFile(file)
+
+        val height = resources.getDimensionPixelSize(R.dimen.photo_height)
+        val width = resources.getDimensionPixelSize(R.dimen.photo_width)
+
+        val request = ImageRequestBuilder.newBuilderWithSource(uri)
+                .setResizeOptions(ResizeOptions(width, height))
+                .build()
+        val controller = Fresco.newDraweeControllerBuilder()
+                .setOldController(view.controller)
+                .setImageRequest(request)
+                .build()
+        view.controller = controller
+    }
+
     private fun requestPermission() {
 
         requestPermissions(arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.CAMERA), CAMERA_REQUEST_CODE)
@@ -244,11 +308,18 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         cursor.close()
 
 
-        encodeImage(photoPath, view.id)
-
+//        encodeImage(photoPath, view.id)
 
         val file = File(photoPath)
         val uri = Uri.fromFile(file)
+
+        if (view.id == idCapture.id) {
+            idPath = photoPath
+            textIdCapture.visibility = View.GONE
+        }else {
+            driverLicencePath = photoPath
+            textDriverLicenceCapture.visibility = View.GONE
+        }
 
         val height = resources.getDimensionPixelSize(R.dimen.photo_height)
         val width = resources.getDimensionPixelSize(R.dimen.photo_width)

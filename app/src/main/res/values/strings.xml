@@ -37,6 +37,7 @@
     <string name="add_your_car_info">Agrega los datos de tu vehiculo</string>
     <string name="textFABQR">Escanear QR</string>
     <string name="textFABWrite">Escribir datos</string>
+    <string name="error">Por favor ingrese este dato</string>
 
 
     <string-array name="has_protection">
