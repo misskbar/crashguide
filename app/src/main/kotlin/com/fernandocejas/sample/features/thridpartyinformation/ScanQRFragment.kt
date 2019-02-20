@@ -1,5 +1,6 @@
 package com.fernandocejas.sample.features.thridpartyinformation
 
+import android.Manifest
 import android.content.Context
 import android.net.Uri
 import android.os.Bundle
@@ -25,6 +26,14 @@ import android.support.v4.content.ContextCompat
 import android.util.SparseArray
 import com.google.android.gms.vision.Detector
 import java.io.IOException
+import android.Manifest.permission
+import android.os.Build
+import android.os.Build.VERSION_CODES
+import android.os.Build.VERSION
+import android.os.Build.VERSION.SDK_INT
+import android.support.v4.app.ActivityCompat
+import android.util.Log
+import java.lang.Thread.sleep
 
 
 class ScanQRFragment : BaseFragment() {
@@ -32,44 +41,59 @@ class ScanQRFragment : BaseFragment() {
     @Inject
     lateinit var navigator: Navigator
 
+    private var token = ""
+    private var tokenanterior = ""
+
+    private val MY_PERMISSIONS_REQUEST_CAMERA = 1
     override fun layoutId()= R.layout.fragment_scan_qr
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        appComponent.inject(this)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // Creates a vertical Layout Manager
         // creo el detector qr
         val barcodeDetector = BarcodeDetector.Builder(context)
                 .setBarcodeFormats(Barcode.QR_CODE)
                 .build()
-
         // creo la camara fuente
         val cameraSource = CameraSource.Builder(context!!, barcodeDetector)
-                .setRequestedPreviewSize(640, 640)
+                .setRequestedPreviewSize(1024 , 1024)
                 .build()
 
 
         camera_view.holder.addCallback(object : SurfaceHolder.Callback {
+
             override fun surfaceCreated(holder: SurfaceHolder) {
 
 
-                // verifico si el usuario dio los permisos para la camara
-                if (ContextCompat.checkSelfPermission(context!!, android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_GRANTED) {
+                if (ActivityCompat.checkSelfPermission(context!!, Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                        // verificamos la version de Android que sea al menos la M para mostrar
+                        // el dialog de la solicitud de la camara
+                        if (shouldShowRequestPermissionRationale(
+                                        Manifest.permission.CAMERA))
+                        ;
+                        requestPermissions(arrayOf(Manifest.permission.CAMERA),
+                                MY_PERMISSIONS_REQUEST_CAMERA)
+                    }
+                    return
+                } else {
                     try {
                         cameraSource.start(camera_view.getHolder())
                     } catch (ie: IOException) {
-//                            Log.e("CAMERA SOURCE", ie.getMessage())
+                        Log.e("CAMERA SOURCE", ie.message)
                     }
 
-                } else {
-                    Toast.makeText(context, resources.getString(R.string.error), Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {}
+            override fun surfaceChanged(holder: SurfaceHolder, format: Int, width: Int, height: Int) {
+
+            }
 
             override fun surfaceDestroyed(holder: SurfaceHolder) {
                 cameraSource.stop()
@@ -82,14 +106,32 @@ class ScanQRFragment : BaseFragment() {
 
 
             override fun receiveDetections( detections : Detector.Detections<Barcode> ) {
-                val  barcodes : SparseArray<Barcode> = detections.getDetectedItems();
-
+                val  barcodes = detections.detectedItems;
+//
                 if (barcodes.size() != 0) {
-                    var token = barcodes.valueAt(0).displayValue.toString();
-                    Toast.makeText(context, "El texto es: $token",Toast.LENGTH_LONG).show()
-                }
+                    token = barcodes.valueAt(0).displayValue.toString();
+                    if (token != tokenanterior) {
+                        tokenanterior = token
+                        println("El texto es: ${token}")
+                        if(token.split(";").size == 14){
+                            navigator.showThirdPartyInformation(context!!,token)
+                        }
+                    }
 
-                barcodeDetector.release()
+                }
+//
+                Thread(Runnable {
+                    try {
+                        synchronized(this) {
+                            sleep(5000L)
+                            tokenanterior = ""
+                        }
+                    } catch (e: InterruptedException) {
+                        // TODO Auto-generated catch block
+                        Log.e("Error", "Waiting didnt work!!")
+                        e.printStackTrace()
+                    }
+                }).start()
             }
         })
 

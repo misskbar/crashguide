@@ -38,7 +38,7 @@ class ThirdPartyAdapter (val items : ArrayList<Terceros>, val context: Context) 
 
         holder.editThird.setOnClickListener( View.OnClickListener {
             val intent =Intent(context, ThirdPartyActivity::class.java)
-            intent.putExtra("third_id", position.toString())
+            intent.putExtra("user_id", position.toString())
             context.startActivity(intent)
         })
 

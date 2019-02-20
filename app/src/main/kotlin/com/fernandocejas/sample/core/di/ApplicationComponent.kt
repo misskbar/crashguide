@@ -27,6 +27,7 @@ import com.fernandocejas.sample.features.onboarding.OnBoardingFragment
 import com.fernandocejas.sample.features.pointinmap.MapFragment
 import com.fernandocejas.sample.features.signup.SignUpFragment
 import com.fernandocejas.sample.features.thridpartyinformation.ScanQRActivity
+import com.fernandocejas.sample.features.thridpartyinformation.ScanQRFragment
 import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyFragment
 import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyListFragment
 import dagger.Component
@@ -46,6 +47,8 @@ interface ApplicationComponent {
 
     fun inject (injuredFragment: InjuredFragment)
 
+    fun inject (scanQRFragment: ScanQRFragment)
+
     fun inject (mapsFragment: MapFragment)
 
     fun inject (thirdPartyFragment: ThirdPartyFragment)
@@ -55,7 +58,5 @@ interface ApplicationComponent {
     fun inject (generateQRFragment: GenerateQRFragment)
 
     fun inject (ThirdPartyListFragment: ThirdPartyListFragment)
-
-    fun inject (scanQRActivity: ScanQRActivity)
 
 }

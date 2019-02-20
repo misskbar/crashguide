@@ -162,13 +162,27 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         idCapture.setOnClickListener(this)
         nextButton.setOnClickListener(this)
         if(!idThird.isEmpty()){
-            nextButton.setText(getString(R.string.modify))
-            setDataThird(idThird.toInt())
+            println("EL idThird en thirdparty es : $idThird")
+            if(idThird.split(";").size == 1){
+                nextButton.setText(getString(R.string.modify))
+                setDataThird(AndroidApplication.globalListTerceros.get(idThird.toInt()))
+            }else{
+
+                var datos = idThird.split(";")
+                datos.get(0)
+//                oswaldo;lopez;jfjakd;659498;hzduir;Si;;;hyundai;accent;ifisid;2005;plomo;
+                var vehiculo = Vehiculo(datos.get(8),datos.get(9),datos.get(10),datos.get(11).toInt(),datos.get(12))
+                var tercero = Terceros(datos.get(0),datos.get(1),datos.get(2),datos.get(3).toInt(),datos.get(4),datos.get(5),datos.get(6),datos.get(7),vehiculo)
+
+                setDataThird(tercero)
+            }
+
+
+
         }
     }
 
-    private fun setDataThird(position: Int){
-        var data = AndroidApplication.globalListTerceros.get(position)
+    private fun setDataThird(data : Terceros){
 
         firstName.setText(data.nombres)
         surname.setText(data.apellidos)
@@ -252,9 +266,11 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
                 spinner.selectedItem.toString(),idPath,driverLicencePath,vehiculo)
 
         //si idThird esta vacio se actualiza los datos del tercero sino agregar un tercero nu evo
-        if(!idThird.isEmpty()){
-            AndroidApplication.globalListTerceros.remove(AndroidApplication.globalListTerceros.get(idThird.toInt()))
-            AndroidApplication.globalListTerceros.add(terceros)
+        if(!idThird.isEmpty() && idThird.split(";").size == 1){
+
+                AndroidApplication.globalListTerceros.remove(AndroidApplication.globalListTerceros.get(idThird.toInt()))
+                AndroidApplication.globalListTerceros.add(terceros)
+
         }else{
             AndroidApplication.globalListTerceros.add(terceros)
         }

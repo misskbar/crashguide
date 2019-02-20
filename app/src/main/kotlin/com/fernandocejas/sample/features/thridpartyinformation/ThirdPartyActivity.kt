@@ -26,15 +26,25 @@ class ThirdPartyActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        if (intent.getStringExtra("third_id") != null)
-            idThird = intent!!.getStringExtra("third_id")
+        if (intent.getStringExtra(THIRD_DATA) != null)
+            idThird = intent!!.getStringExtra(THIRD_DATA)
     }
 
     public fun getThirdID() = idThird
 
     companion object {
+
+        private val THIRD_DATA = "user_id"
+
+
         fun callingIntent(context: Context) = Intent(context, ThirdPartyActivity::class.java)
+
+
+        fun callingIntent(context: Context, extra: String): Intent{
+            val intent = Intent(context, ThirdPartyActivity::class.java)
+            intent.putExtra(THIRD_DATA, extra)
+            return intent
+        }
 
     }
 

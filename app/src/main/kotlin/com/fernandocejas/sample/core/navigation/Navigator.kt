@@ -68,6 +68,8 @@ class Navigator
 
     fun showThirdPartyInformation(context: Context) = context.startActivity(ThirdPartyActivity.callingIntent(context))
 
+    fun showThirdPartyInformation(context: Context, extra: String) = context.startActivity(ThirdPartyActivity.callingIntent(context,extra))
+
     fun showSignUp(context: Context) = context.startActivity(SignUpActivity.callingIntent(context))
 
     fun showThirdPartyList(context: Context) = context.startActivity(ThirdPartyListActivity.callingIntent(context))
