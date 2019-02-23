@@ -24,6 +24,7 @@ import android.content.pm.PackageManager
 import android.content.res.Resources
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.net.Uri
 import android.os.Bundle
 import android.provider.MediaStore
@@ -31,8 +32,7 @@ import android.support.v4.content.ContextCompat
 import android.util.Base64
 import android.view.View
 import android.view.WindowManager
-import android.widget.ImageView
-import android.widget.Toast
+import android.widget.*
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.common.ResizeOptions
@@ -43,13 +43,13 @@ import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_third_party_information.*
 import java.io.File
 import javax.inject.Inject
-import android.widget.ArrayAdapter
 import com.facebook.binaryresource.FileBinaryResource
 import com.facebook.imagepipeline.core.ImagePipelineFactory
 import com.facebook.binaryresource.BinaryResource
 import com.facebook.imagepipeline.cache.DefaultCacheKeyFactory
 import com.facebook.cache.common.CacheKey
 import com.facebook.imagepipeline.request.ImageRequest
+import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import java.io.ByteArrayOutputStream
 
 
@@ -85,15 +85,51 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
 
             }
         }else if (v.id == nextButton.id) {
-//            getData()
-            navigator.generateQR(activity!!, getData())
+            if(validateEmpty(firstName) && validateEmpty(surname) && validateEmpty(rut) &&
+                    validateEmpty(telefono) && validateEmpty(email) &&
+                    validateEmptySpinner(spinner) && validateEmptyPath(idPath, textIdCapture) &&
+                    validateEmptyPath(driverLicencePath, textDriverLicenceCapture) &&
+                    validateEmpty(brand) && validateEmpty(model) &&
+                    validateEmpty(registrationNumber) && validateEmpty(year) && validateEmpty(color))
+                navigator.generateQR(activity!!, getData())
         }
+    }
+
+    private fun validateEmpty(editText: EditText): Boolean{
+        if(editText.text.isEmpty()){
+            editText.error = getString(R.string.error)
+            return false
+        }
+        return true
+    }
+
+    private fun validateEmptySpinner(spinner: Spinner): Boolean{
+        if(spinner.selectedItemPosition == 0){
+            val errorText = (spinner.selectedView as TextView)
+            errorText.error = ""
+            errorText.setTextColor(Color.RED)//just to highlight that this is an error
+            errorText.text = getString(R.string.error)//changes the selected item text to this
+            scrollView.scrollTo(0,spinner.bottom)
+            return false
+        }
+        return true
+    }
+
+    private fun validateEmptyPath(path : String,textView: TextView): Boolean{
+        if(path.isEmpty()){
+            textView.error = ""
+            textView.setTextColor(Color.RED)//just to highlight that this is an error
+            scrollView.scrollTo(0,textView.bottom)
+            return false
+        }
+        return true
     }
 
     private val CAMERA_REQUEST_CODE = 102
     private var mCurrentPhotoPath: String = ""
     private var idPath: String = ""
     private var driverLicencePath: String = ""
+    var dbHandler: DataBaseHelper? = null
 
     private lateinit var button: View
 
@@ -123,7 +159,9 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
         spinner.adapter = ArrayAdapter(activity, R.layout.spinner_item, hasProtection)
         getActivity()!!.getWindow().setSoftInputMode(
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        dbHandler = DataBaseHelper(context!!)
         nextButton.setOnClickListener(this)
+
     }
 
     private fun requestPermission() {
@@ -148,16 +186,42 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
     }
 
     private fun getData() : String{
+
+        val vehiculo = VehiculoUsuario(0,
+                brand.text.toString(),
+                model.text.toString(),
+                registrationNumber.text.toString(),
+                year.text.toString().toInt(),
+                color.text.toString(),
+                0)
+
+        val usuario = Usuario(0,
+                firstName.text.toString(),
+                surname.text.toString(),
+                rut.text.toString(),
+                telefono.text.toString().toInt(),
+                email.text.toString(),
+                spinner.selectedItem.toString(),
+                idPath,
+                driverLicencePath,
+                vehiculo)
+        val idUsuario = (dbHandler!!.addUsuario(usuario)).toInt()
+        println("El id es $idUsuario")
+
+        val idVehiculo = dbHandler!!.addVehiculo(vehiculo, idUsuario )
+        println("El id es $idVehiculo")
+
+
         var data: String = ""
+
         data = data.plus(firstName.text).plus(";").plus(surname.text).plus(";")
                 .plus(rut.text).plus(";").plus(telefono.text).plus(";")
                 .plus(email.text).plus(";").plus(spinner.selectedItem).plus(";")
-                .plus(idPath).plus(";").plus(driverLicencePath).plus(";")
+                .plus("").plus(";").plus("").plus(";")
                 .plus(brand.text).plus(";").plus(model.text).plus(";")
                 .plus(registrationNumber.text).plus(";").plus(year.text).plus(";")
                 .plus(color.text).plus(";")
 
-//        Toast.makeText(activity, "el extra es: $data", Toast.LENGTH_LONG).show()
         return data
     }
 
@@ -187,12 +251,23 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
         cursor.close()
 
 
-        encodeImage(photoPath, view.id)
+//        encodeImage(photoPath, view.id)
 
 
         val file = File(photoPath)
 
         val uri = Uri.fromFile(file)
+
+
+        if (view.id == idCapture.id) {
+            idPath = photoPath
+            textIdCapture.visibility = View.GONE
+        }else {
+            driverLicencePath = photoPath
+            textDriverLicenceCapture.visibility = View.GONE
+        }
+
+
         val height = resources.getDimensionPixelSize(R.dimen.photo_height)
         val width = resources.getDimensionPixelSize(R.dimen.photo_width)
 
