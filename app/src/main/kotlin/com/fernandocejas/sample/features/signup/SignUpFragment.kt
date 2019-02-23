@@ -33,6 +33,7 @@ import android.util.Base64
 import android.view.View
 import android.view.WindowManager
 import android.widget.*
+import android.widget.ImageView
 import com.facebook.drawee.backends.pipeline.Fresco
 import com.facebook.drawee.view.SimpleDraweeView
 import com.facebook.imagepipeline.common.ResizeOptions
@@ -51,6 +52,7 @@ import com.facebook.cache.common.CacheKey
 import com.facebook.imagepipeline.request.ImageRequest
 import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import java.io.ByteArrayOutputStream
+import android.widget.ArrayAdapter
 
 
 
