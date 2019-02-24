@@ -109,6 +109,7 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
 
     }
 
+
     fun decodeImage(image: String){
         val imageBytes = Base64.decode(image,Base64.DEFAULT)
         val image = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.size)
