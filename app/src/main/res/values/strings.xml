@@ -38,6 +38,7 @@
     <string name="textFABQR">Escanear QR</string>
     <string name="textFABWrite">Escribir datos</string>
     <string name="error">Por favor ingrese este dato</string>
+    <string name="this_qr">Usa este QR para enviar tu información</string>
 
 
     <string-array name="has_protection">

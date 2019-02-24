@@ -40,6 +40,7 @@ import com.facebook.imagepipeline.common.ResizeOptions
 import com.facebook.imagepipeline.request.ImageRequestBuilder
 import com.fernandocejas.sample.R
 import com.fernandocejas.sample.R.id.qrBarcode
+import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.core.platform.BaseFragment
 import com.google.zxing.BarcodeFormat
@@ -55,6 +56,9 @@ import java.util.*
 import javax.inject.Inject
 
 class GenerateQRFragment : BaseFragment(), View.OnClickListener {
+
+    var dbHandler: DataBaseHelper? = null
+
     override fun onClick(v: View?) {
         if (v!!.id == homeButton.id) {
 
@@ -78,14 +82,25 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dbHandler = DataBaseHelper(context!!)
+        if(dbHandler!!.existsUsuario() && !dbHandler!!.getUsuario().fotoQR.isEmpty()){
+            homeButton.text = getString(R.string.modify)
+            val bitmap = BitmapFactory.decodeFile(dbHandler!!.getUsuario().fotoQR)
+            qrBarcode.setImageBitmap(bitmap)
+        }else{
+            var singUpData = (activity as GenerateQRActivity ).getSingUpData()
+            val data = singUpData.split(";")
+            var bitmap = TextToImageEncode(singUpData)
+            qrBarcode.setImageBitmap(bitmap)
+            val pathQR = saveImage(bitmap)
+            //guarda el path del qr en el usuario
+            val usuario = dbHandler!!.getUsuario()
+            usuario.fotoQR = pathQR
+            dbHandler!!.updateUsuario(usuario)
+        }
         homeButton.setOnClickListener(this)
 
-        var singUpData = (activity as GenerateQRActivity ).getSingUpData()
-        val data = singUpData.split(";")
-        val idCapture = data[6]
-        println("la data es $singUpData")
-        var bitmap = TextToImageEncode(singUpData)
-        qrBarcode.setImageBitmap(bitmap)
+
     }
 
     fun decodeImage(image: String){
@@ -99,6 +114,9 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
         val wallpaperDirectory = File(
                 Environment.getExternalStorageDirectory().toString() + IMAGE_DIRECTORY)
         // have the object build the directory structure, if needed.
+
+
+
 
         if (!wallpaperDirectory.exists()) {
             Log.d("dirrrrrr", "" + wallpaperDirectory.mkdirs())

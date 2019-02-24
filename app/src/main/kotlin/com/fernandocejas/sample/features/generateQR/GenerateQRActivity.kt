@@ -28,7 +28,7 @@ class GenerateQRActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        datasingUpData = intent.getStringExtra(SING_UP_DATA)
+        datasingUpData = intent!!.getStringExtra(SING_UP_DATA)
                 ?: throw IllegalStateException("field $SING_UP_DATA missing in Intent")
     }
 
@@ -41,11 +41,8 @@ class GenerateQRActivity : BaseActivity() {
         fun callingIntent(context: Context) = Intent(context, GenerateQRActivity::class.java)
 
         fun callingIntent(context: Context, extra: String): Intent{
-            println("GenerateQRActivity inicia el metodo callingIntent")
             val intent = Intent(context, GenerateQRActivity::class.java)
-            println("GenerateQRActivity creo el inten")
             intent.putExtra(SING_UP_DATA, extra)
-            println("GenerateQRActivity coloca el extra")
             return intent
         }
     }

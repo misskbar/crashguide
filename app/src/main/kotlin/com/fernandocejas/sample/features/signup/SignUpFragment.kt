@@ -206,6 +206,7 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
                 spinner.selectedItem.toString(),
                 idPath,
                 driverLicencePath,
+                "",
                 vehiculo)
         val idUsuario = (dbHandler!!.addUsuario(usuario)).toInt()
         println("El id es $idUsuario")

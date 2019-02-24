@@ -18,6 +18,7 @@ package com.fernandocejas.sample.features.onboarding
 import android.os.Bundle
 import android.view.View
 import com.fernandocejas.sample.R
+import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_onboarding.*
@@ -28,6 +29,8 @@ class OnBoardingFragment : BaseFragment() {
     @Inject
     lateinit var navigator: Navigator
 
+
+    var dbHandler: DataBaseHelper? = null
     override fun layoutId() = R.layout.fragment_onboarding
 
 
@@ -35,14 +38,27 @@ class OnBoardingFragment : BaseFragment() {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
 
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dbHandler = DataBaseHelper(context!!)
+
+        val usuario = dbHandler!!.getUsuario()
+        println("Si hay un usuario y es ${usuario.nombres}")
         startButton.setOnClickListener(View.OnClickListener { navigator.showIsAnyInjured(activity!!)})
 
-        login.setOnClickListener( View.OnClickListener { navigator.showSignUp(activity!!) })
+        login.setOnClickListener( View.OnClickListener {
+
+            if(dbHandler!!.existsUsuario()){
+                navigator.generateQR(activity!!,"")
+            }else{
+                navigator.showSignUp(activity!!)
+            }
+
+        })
     }
 
 }

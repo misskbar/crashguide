@@ -10,12 +10,6 @@ import com.fernandocejas.sample.features.signup.VehiculoUsuario
 class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelper.DB_NAME, null, DataBaseHelper.DB_VERSION) {
 
     companion object {
-//        (val nombres: String, val apellidos: String, val rut: String,
-//        val telefono: Int, val correo: String, val seguro: String, val fotoCarnet: String,
-//        val fotoLicencia: String, val vehiculo: Vehiculo)
-
-        //        (val marca: String, val modelo: String, val patente: String,
-//        val ano: Int, val color: String)
         private val DB_VERSION = 1
         private val DB_NAME = "DBCrashGuide"
 
@@ -30,6 +24,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         private val SEGURO = "Seguro"
         private val FOTOCARNET = "FotoCarnet"
         private val FOTOLICENCIA = "FotoLicencia"
+        private val FOTOQR = "FotoQR"
 
 
         private val TABLE_NAME_VEHICULO = "Vehiculo"
@@ -54,7 +49,8 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 CORREO + " TEXT," +
                 SEGURO + " TEXT," +
                 FOTOCARNET + " TEXT," +
-                FOTOLICENCIA + " TEXT);"
+                FOTOLICENCIA + " TEXT,  " +
+                FOTOQR + " TEXT);"
         db.execSQL(CREATE_TABLE_USUARIO)
 
         val CREATE_TABLE_VEHICULO = "CREATE TABLE $TABLE_NAME_VEHICULO (" +
@@ -104,6 +100,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         values.put(SEGURO, usuario.seguro)
         values.put(FOTOCARNET, usuario.fotoCarnet)
         values.put(FOTOLICENCIA, usuario.fotoLicencia)
+        values.put(FOTOQR, usuario.fotoQR)
         val _success = db.insert(TABLE_NAME_USUARIO, null, values)
         db.close()
         return _success
@@ -133,6 +130,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         values.put(SEGURO, usuario.seguro)
         values.put(FOTOCARNET, usuario.fotoCarnet)
         values.put(FOTOLICENCIA, usuario.fotoLicencia)
+        values.put(FOTOQR, usuario.fotoQR)
         val _success = db.update(TABLE_NAME_USUARIO, values, IDUSUARIO + "=?", arrayOf(usuario.id.toString())).toLong()
         db.close()
         return Integer.parseInt("$_success") != -1
@@ -188,8 +186,8 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 vehiculoUsuario.ano = cursor.getInt(cursor.getColumnIndex(ANO))
                 vehiculoUsuario.color = cursor.getString(cursor.getColumnIndex(COLOR))
                 //Datos de usuario
-                println("el $IDUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(IDUSUARIO))}|")
-                println("el $NOMBRES  es: |${cursor.getString(cursor.getColumnIndex(NOMBRES))}|")
+//                println("el $IDUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(IDUSUARIO))}|")
+//                println("el $NOMBRES  es: |${cursor.getString(cursor.getColumnIndex(NOMBRES))}|")
 
                 usuario.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(IDUSUARIO)))
                 usuario.nombres = cursor.getString(cursor.getColumnIndex(NOMBRES))
@@ -200,11 +198,29 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 usuario.seguro = cursor.getString(cursor.getColumnIndex(SEGURO))
                 usuario.fotoCarnet = cursor.getString(cursor.getColumnIndex(FOTOCARNET))
                 usuario.fotoLicencia = cursor.getString(cursor.getColumnIndex(FOTOLICENCIA))
+                usuario.fotoQR = cursor.getString(cursor.getColumnIndex(FOTOQR))
                 usuario.vehiculo = vehiculoUsuario
-//                break
+                break
             }
         }
         cursor.close()
         return usuario
+    }
+
+    fun existsUsuario(): Boolean {
+        var existe = false
+        val db = writableDatabase
+        val selectQuery = "SELECT * FROM $TABLE_NAME_USUARIO"
+        val cursor = db.rawQuery(selectQuery, null)
+        if (cursor != null) {
+            cursor.moveToFirst()
+            while (cursor.moveToNext()) {
+                println("consiguio usuario")
+                existe = true
+                break
+            }
+        }
+        cursor.close()
+        return existe
     }
 }
