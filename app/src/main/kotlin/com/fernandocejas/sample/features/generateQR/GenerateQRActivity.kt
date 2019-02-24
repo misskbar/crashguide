@@ -23,16 +23,16 @@ import com.fernandocejas.sample.core.platform.BaseActivity
 
 class GenerateQRActivity : BaseActivity() {
 
-    var datasingUpData: String = "";
+//    var datasingUpData: String = "";
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        datasingUpData = intent!!.getStringExtra(SING_UP_DATA)
-                ?: throw IllegalStateException("field $SING_UP_DATA missing in Intent")
+//
+//        datasingUpData = intent!!.getStringExtra(SING_UP_DATA)
+//                ?: throw IllegalStateException("field $SING_UP_DATA missing in Intent")
     }
 
-    public fun getSingUpData() = datasingUpData
+//    public fun getSingUpData() = datasingUpData
 
     companion object {
 
@@ -40,11 +40,11 @@ class GenerateQRActivity : BaseActivity() {
 
         fun callingIntent(context: Context) = Intent(context, GenerateQRActivity::class.java)
 
-        fun callingIntent(context: Context, extra: String): Intent{
-            val intent = Intent(context, GenerateQRActivity::class.java)
-            intent.putExtra(SING_UP_DATA, extra)
-            return intent
-        }
+//        fun callingIntent(context: Context, extra: String): Intent{
+//            val intent = Intent(context, GenerateQRActivity::class.java)
+//            intent.putExtra(SING_UP_DATA, extra)
+//            return intent
+//        }
     }
 
     override fun fragment() = GenerateQRFragment()

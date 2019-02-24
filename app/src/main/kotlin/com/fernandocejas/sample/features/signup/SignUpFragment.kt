@@ -93,8 +93,11 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
                     validateEmptySpinner(spinner) && validateEmptyPath(idPath, textIdCapture) &&
                     validateEmptyPath(driverLicencePath, textDriverLicenceCapture) &&
                     validateEmpty(brand) && validateEmpty(model) &&
-                    validateEmpty(registrationNumber) && validateEmpty(year) && validateEmpty(color))
-                navigator.generateQR(activity!!, getData())
+                    validateEmpty(registrationNumber) && validateEmpty(year) && validateEmpty(color)){
+                getData()
+                navigator.generateQR(activity!!)
+            }
+
         }
     }
 

@@ -95,7 +95,8 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
             qrBarcode.setImageBitmap(bitmap)
         }else{
             goHome = true
-            var singUpData = (activity as GenerateQRActivity ).getSingUpData()
+//            var singUpData = (activity as GenerateQRActivity ).getSingUpData()
+            var singUpData = armarCadena()
             var bitmap = TextToImageEncode(singUpData)
             qrBarcode.setImageBitmap(bitmap)
             val pathQR = saveImage(bitmap)
@@ -107,6 +108,20 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
         homeButton.setOnClickListener(this)
 
 
+    }
+
+    fun armarCadena() : String {
+        var data: String = ""
+        var usuario = dbHandler!!.getUsuario()
+        data = data.plus(usuario.nombres).plus(";").plus(usuario.apellidos).plus(";")
+                .plus(usuario.rut).plus(";").plus(usuario.telefono).plus(";")
+                .plus(usuario.correo).plus(";").plus(usuario.seguro).plus(";")
+                .plus("").plus(";").plus("").plus(";")
+                .plus(usuario.vehiculo!!.marca).plus(";").plus(usuario.vehiculo!!.modelo).plus(";")
+                .plus(usuario.vehiculo!!.patente).plus(";").plus(usuario.vehiculo!!.ano).plus(";")
+                .plus(usuario.vehiculo!!.color).plus(";")
+
+        return data
     }
 
 

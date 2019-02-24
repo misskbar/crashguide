@@ -53,7 +53,7 @@ class OnBoardingFragment : BaseFragment() {
         login.setOnClickListener( View.OnClickListener {
 
             if(dbHandler!!.existsUsuario()){
-                navigator.generateQR(activity!!,"")
+                navigator.generateQR(activity!!)
             }else{
                 navigator.showSignUp(activity!!)
             }
