@@ -164,6 +164,63 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
         dbHandler = DataBaseHelper(context!!)
         nextButton.setOnClickListener(this)
 
+        if(dbHandler!!.existsUsuario()){
+            setDataUsuario(dbHandler!!.getUsuario())
+        }
+
+    }
+
+    private fun setDataUsuario(data : Usuario){
+
+        firstName.setText(data.nombres)
+        surname.setText(data.apellidos)
+        rut.setText(data.rut)
+        telefono.setText(data.telefono.toString())
+        email.setText(data.correo)
+
+        setSpinner(data.seguro)
+
+        if(!data.fotoCarnet.equals("")) {
+            textIdCapture.visibility = View.GONE
+            idPath = data.fotoCarnet
+            setImage(idCapture as SimpleDraweeView, data.fotoCarnet)
+        }
+
+        if(!data.fotoLicencia.equals("")) {
+            textDriverLicenceCapture.visibility = View.GONE
+            driverLicencePath = data.fotoLicencia
+            setImage(driverLicenceCapture as SimpleDraweeView, data.fotoLicencia)
+        }
+        brand.setText(data.vehiculo!!.marca)
+        model.setText(data.vehiculo!!.modelo)
+        registrationNumber.setText(data.vehiculo!!.patente)
+        year.setText(data.vehiculo!!.ano.toString())
+        color.setText(data.vehiculo!!.color)
+
+    }
+
+    private fun setSpinner(seguro : String) {
+        if(seguro.equals("Si")){
+            spinner.setSelection(1)
+        }else if(seguro.equals("No")) {
+            spinner.setSelection(2)
+        }
+    }
+    private fun setImage(view: SimpleDraweeView, photoPath: String){
+        val file = File(photoPath)
+        val uri = Uri.fromFile(file)
+
+        val height = resources.getDimensionPixelSize(R.dimen.photo_height)
+        val width = resources.getDimensionPixelSize(R.dimen.photo_width)
+
+        val request = ImageRequestBuilder.newBuilderWithSource(uri)
+                .setResizeOptions(ResizeOptions(width, height))
+                .build()
+        val controller = Fresco.newDraweeControllerBuilder()
+                .setOldController(view.controller)
+                .setImageRequest(request)
+                .build()
+        view.controller = controller
     }
 
     private fun requestPermission() {
@@ -208,11 +265,20 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
                 driverLicencePath,
                 "",
                 vehiculo)
-        val idUsuario = (dbHandler!!.addUsuario(usuario)).toInt()
-        println("El id es $idUsuario")
 
-        val idVehiculo = dbHandler!!.addVehiculo(vehiculo, idUsuario )
-        println("El id es $idVehiculo")
+
+        if(dbHandler!!.existsUsuario()){
+            val idUsuario = dbHandler!!.getUsuario().id
+            val idVehiculo = dbHandler!!.getUsuario().vehiculo!!.id
+            usuario.id = idUsuario
+            usuario.vehiculo!!.id = idVehiculo
+            dbHandler!!.updateUsuario(usuario)
+            dbHandler!!.updateVehiculo(vehiculo)
+        }else{
+            val idUsuario = (dbHandler!!.addUsuario(usuario)).toInt()
+            dbHandler!!.addVehiculo(vehiculo, idUsuario )
+        }
+
 
 
         var data: String = ""

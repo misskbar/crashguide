@@ -58,12 +58,17 @@ import javax.inject.Inject
 class GenerateQRFragment : BaseFragment(), View.OnClickListener {
 
     var dbHandler: DataBaseHelper? = null
+    var goHome = true
+
 
     override fun onClick(v: View?) {
         if (v!!.id == homeButton.id) {
 
-            navigator.showMain(activity!!)
-
+            if(goHome){
+                navigator.showMain(activity!!)
+            }else{
+                navigator.showSignUp(activity!!)
+            }
         }
     }
 
@@ -84,12 +89,13 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
 
         dbHandler = DataBaseHelper(context!!)
         if(dbHandler!!.existsUsuario() && !dbHandler!!.getUsuario().fotoQR.isEmpty()){
+            goHome = false
             homeButton.text = getString(R.string.modify)
             val bitmap = BitmapFactory.decodeFile(dbHandler!!.getUsuario().fotoQR)
             qrBarcode.setImageBitmap(bitmap)
         }else{
+            goHome = true
             var singUpData = (activity as GenerateQRActivity ).getSingUpData()
-            val data = singUpData.split(";")
             var bitmap = TextToImageEncode(singUpData)
             qrBarcode.setImageBitmap(bitmap)
             val pathQR = saveImage(bitmap)
