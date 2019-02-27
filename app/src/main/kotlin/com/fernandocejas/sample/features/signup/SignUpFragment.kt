@@ -95,11 +95,27 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
                     validateEmpty(brand) && validateEmpty(model) &&
                     validateEmpty(registrationNumber) && validateEmpty(year) && validateEmpty(color)){
                 getData()
-                navigator.generateQR(activity!!)
+
+                when (callingActivity) {
+
+                    Navigator.activityOnBoarding -> {
+                        navigator.generateQR(activity!!,Navigator.activityOnBoarding)
+                    }
+                    Navigator.activityGenerateQR -> {
+                        navigator.generateQR(activity!!,Navigator.activityOnBoarding)
+                    }
+                    Navigator.activityMap -> {
+                        navigator.generateQR(activity!!,Navigator.activityThirdParty)
+                    }
+
+                }
+
             }
 
         }
     }
+
+    private var callingActivity = 0;
 
     private fun validateEmpty(editText: EditText): Boolean{
         if(editText.text.isEmpty()){
@@ -167,6 +183,8 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
                 WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         dbHandler = DataBaseHelper(context!!)
         nextButton.setOnClickListener(this)
+
+        callingActivity = (activity as SignUpActivity ).callingActivity
 
         if(dbHandler!!.existsUsuario()){
             setDataUsuario(dbHandler!!.getUsuario())

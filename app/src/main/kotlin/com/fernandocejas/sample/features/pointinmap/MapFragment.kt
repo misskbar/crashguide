@@ -17,6 +17,7 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
 import com.fernandocejas.sample.R
+import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.core.platform.BaseFragment
 import com.google.android.gms.common.ConnectionResult
@@ -104,6 +105,8 @@ class MapFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleLi
 
     lateinit var currentLocation: LatLng
 
+    var dbHandler: DataBaseHelper? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         appComponent.inject(this)
@@ -134,7 +137,17 @@ class MapFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleLi
 
         address.setAdapter(mPlaceArrayAdapter)
 
-        nextButton.setOnClickListener(View.OnClickListener { navigator.showThirdPartyInformation(activity!!)})
+        dbHandler = DataBaseHelper(context!!)
+        nextButton.setOnClickListener(View.OnClickListener {
+            if(dbHandler!!.existsUsuario()){
+                println("el usuario existe")
+                navigator.showThirdPartyInformation(activity!!)
+            }else{
+                println("el usuario NO existe")
+                navigator.showSignUp(activity!!,Navigator.activityMap)
+            }
+
+        })
 
     }
 

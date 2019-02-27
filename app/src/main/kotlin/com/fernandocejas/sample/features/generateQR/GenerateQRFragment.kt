@@ -59,15 +59,24 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
 
     var dbHandler: DataBaseHelper? = null
     var goHome = true
-
+    var nextActivity = 0
 
     override fun onClick(v: View?) {
         if (v!!.id == homeButton.id) {
 
-            if(goHome){
-                navigator.showMain(activity!!)
-            }else{
-                navigator.showSignUp(activity!!)
+
+            when (nextActivity) {
+
+                Navigator.activityOnBoarding -> {
+                    navigator.showMain(activity!!)
+                }
+                Navigator.activitySingUp -> {
+                    navigator.showSignUp(activity!!,Navigator.activityGenerateQR)
+                }
+                Navigator.activityThirdParty -> {
+                    navigator.showThirdPartyInformation(activity!!)
+                }
+
             }
         }
     }
@@ -87,15 +96,17 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        nextActivity = (activity as GenerateQRActivity ).nextActivity
+
         dbHandler = DataBaseHelper(context!!)
         if(dbHandler!!.existsUsuario() && !dbHandler!!.getUsuario().fotoQR.isEmpty()){
-            goHome = false
+//            goHome = false
             homeButton.text = getString(R.string.modify)
             val bitmap = BitmapFactory.decodeFile(dbHandler!!.getUsuario().fotoQR)
             qrBarcode.setImageBitmap(bitmap)
         }else{
-            goHome = true
-//            var singUpData = (activity as GenerateQRActivity ).getSingUpData()
+//            goHome = true
+
             var singUpData = armarCadena()
             var bitmap = TextToImageEncode(singUpData)
             qrBarcode.setImageBitmap(bitmap)

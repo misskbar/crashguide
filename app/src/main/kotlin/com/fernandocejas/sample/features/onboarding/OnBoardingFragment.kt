@@ -21,6 +21,8 @@ import com.fernandocejas.sample.R
 import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.core.platform.BaseFragment
+import com.fernandocejas.sample.features.signup.Usuario
+import com.fernandocejas.sample.features.signup.VehiculoUsuario
 import kotlinx.android.synthetic.main.fragment_onboarding.*
 import javax.inject.Inject
 
@@ -46,16 +48,49 @@ class OnBoardingFragment : BaseFragment() {
 
         dbHandler = DataBaseHelper(context!!)
 
-        val usuario = dbHandler!!.getUsuario()
-        println("Si hay un usuario y es ${usuario.nombres}")
+
+        if(!dbHandler!!.existsUsuario()){
+            val vehiculo = VehiculoUsuario(0,"Marca","Modelo","patente",0,"Plomo",0)
+
+            val usuario = Usuario(0,"Oswaldo","Lopez","rut",0,"correo","Si","","","",vehiculo)
+
+            var id = dbHandler!!.addUsuario(usuario)
+            println("id $id")
+            var agrego = dbHandler!!.addVehiculo(vehiculo, id.toInt())
+            println("Agrego el prime vehiculo: $agrego")
+            dbHandler!!.deleteAllVehiculo()
+            dbHandler!!.deleteAllUsuario()
+        }
+
+//        println("Nombre ${dbHandler!!.getUsuario().nombres}")
+
+        println("")
+        println("")
+        println("")
+        dbHandler!!.getUsuario()
+        println("LISTA DE USUARIOS \n\n")
+        dbHandler!!.verUsuarios()
+        println("LISTA DE VEHICULOS \n\n")
+        dbHandler!!.verVehiculos()
+
+//        println(dbHandler!!.existsUsuario())
+//        println("Nombre ${dbHandler!!.getUsuario().nombres}")
+//
+//        id = dbHandler!!.addUsuario(usuario)
+//        println("id $id")
+//        dbHandler!!.addVehiculo(vehiculo, id.toInt())
+//
+//        println(dbHandler!!.existsUsuario())
+//        println("Nombre ${dbHandler!!.getUsuario().nombres}")
+
         startButton.setOnClickListener(View.OnClickListener { navigator.showIsAnyInjured(activity!!)})
 
         login.setOnClickListener( View.OnClickListener {
 
             if(dbHandler!!.existsUsuario()){
-                navigator.generateQR(activity!!)
+                navigator.generateQR(activity!!,Navigator.activitySingUp)
             }else{
-                navigator.showSignUp(activity!!)
+                navigator.showSignUp(activity!!,Navigator.activityOnBoarding)
             }
 
         })

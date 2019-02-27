@@ -46,6 +46,17 @@ import javax.inject.Singleton
 class Navigator
 @Inject constructor(private val authenticator: Authenticator) {
 
+    companion object{
+
+        const val activityOnBoarding = 1001
+        const val activitySingUp = 1002
+        const val activityGenerateQR = 1003
+        const val activityThirdPartyList = 1004
+        const val activityMap = 1005
+        const val activityThirdParty = 1006
+
+    }
+
     private fun showOnBoarding(context: Context) = context.startActivity(OnBoardingActivity.callingIntent(context))
 
     fun showMain(context: Context) {
@@ -72,15 +83,21 @@ class Navigator
 
     fun showSignUp(context: Context) = context.startActivity(SignUpActivity.callingIntent(context))
 
+    fun showSignUp(context: Context, callingActivity: Int) {
+
+        context.startActivity(SignUpActivity.callingIntent(context,callingActivity))
+
+    }
+
     fun showThirdPartyList(context: Context) = context.startActivity(ThirdPartyListActivity.callingIntent(context))
 
     fun generateQR(context: Context) = context.startActivity(GenerateQRActivity.callingIntent(context))
 
-//    fun generateQR(context: Context, extra: String) {
-//
-//        context.startActivity(GenerateQRActivity.callingIntent(context,extra))
-//
-//    }
+    fun generateQR(context: Context, nextActivity: Int) {
+
+        context.startActivity(GenerateQRActivity.callingIntent(context,nextActivity))
+
+    }
 
     private fun showMovies(context: Context) = context.startActivity(MoviesActivity.callingIntent(context))
 

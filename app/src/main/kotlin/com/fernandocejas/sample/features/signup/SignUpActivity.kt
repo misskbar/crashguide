@@ -17,11 +17,31 @@ package com.fernandocejas.sample.features.signup
 
 import android.content.Context
 import android.content.Intent
+import android.os.Bundle
 import com.fernandocejas.sample.core.platform.BaseActivity
 
 class SignUpActivity : BaseActivity() {
+
+    var callingActivity = 0;
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        callingActivity = intent!!.getIntExtra(CALLING_ACTIVITY,0)
+    }
+
     companion object {
+
+        private val CALLING_ACTIVITY = "calling_activity"
+
+        fun callingIntent(context: Context, callingActivity: Int): Intent{
+            val intent = Intent(context, SignUpActivity::class.java)
+            intent.putExtra(CALLING_ACTIVITY, callingActivity)
+            return intent
+        }
+
         fun callingIntent(context: Context) = Intent(context, SignUpActivity::class.java)
+
     }
 
     override fun fragment() = SignUpFragment()
