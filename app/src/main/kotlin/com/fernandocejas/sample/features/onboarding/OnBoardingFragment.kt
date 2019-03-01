@@ -58,8 +58,8 @@ class OnBoardingFragment : BaseFragment() {
             println("id $id")
             var agrego = dbHandler!!.addVehiculo(vehiculo, id.toInt())
             println("Agrego el prime vehiculo: $agrego")
-            dbHandler!!.deleteAllVehiculo()
-            dbHandler!!.deleteAllUsuario()
+//            dbHandler!!.deleteAllVehiculo()
+//            dbHandler!!.deleteAllUsuario()
         }
 
 //        println("Nombre ${dbHandler!!.getUsuario().nombres}")

@@ -213,7 +213,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 usuario.fotoLicencia = cursor.getString(cursor.getColumnIndex(FOTOLICENCIA))
                 usuario.fotoQR = cursor.getString(cursor.getColumnIndex(FOTOQR))
                 usuario.vehiculo = vehiculoUsuario
-//                break
+                break
             }
         }
         cursor.close()
@@ -238,6 +238,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 println("el $TELEFONO  es: |${cursor.getString(cursor.getColumnIndex(TELEFONO))}|")
                 println("el $CORREO  es: |${cursor.getString(cursor.getColumnIndex(CORREO))}|")
                 println("el $SEGURO  es: |${cursor.getString(cursor.getColumnIndex(SEGURO))}|")
+                println("el $FOTOCARNET  es: |${cursor.getString(cursor.getColumnIndex(FOTOCARNET))}|")
 //                println("___________________________________________________________________________")
 
 //                break
