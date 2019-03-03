@@ -175,7 +175,8 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         val cursor = db.rawQuery(selectQuery, null)
         if (cursor != null) {
             cursor.moveToFirst()
-            while (cursor.moveToNext()) {
+
+            while (cursor.isAfterLast == false) {
                 //Datos de vehiculo
                 vehiculoUsuario.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(IDVEHICULO)))
                 vehiculoUsuario.marca = cursor.getString(cursor.getColumnIndex(MARCA))
@@ -185,22 +186,22 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 vehiculoUsuario.ano = cursor.getInt(cursor.getColumnIndex(ANO))
                 vehiculoUsuario.color = cursor.getString(cursor.getColumnIndex(COLOR))
                 //Datos de usuario
-//                println("____________________________datos usuario___________________________________")
-//                println("el $IDUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(IDUSUARIO))}|")
-//                println("el $NOMBRES  es: |${cursor.getString(cursor.getColumnIndex(NOMBRES))}|")
-//                println("el $APELLIDOS  es: |${cursor.getString(cursor.getColumnIndex(APELLIDOS))}|")
-//                println("el $RUT  es: |${cursor.getString(cursor.getColumnIndex(RUT))}|")
-//                println("el $TELEFONO  es: |${cursor.getString(cursor.getColumnIndex(TELEFONO))}|")
-//                println("el $CORREO  es: |${cursor.getString(cursor.getColumnIndex(CORREO))}|")
-//                println("el $SEGURO  es: |${cursor.getString(cursor.getColumnIndex(SEGURO))}|")
-//                println("_____________________________datos vehiculo________________________________")
-//                println("La $IDVEHICULO  es: |${cursor.getString(cursor.getColumnIndex(IDVEHICULO))}|")
-//                println("La $MARCA  es: |${cursor.getString(cursor.getColumnIndex(MARCA))}|")
-//                println("La $PATENTE  es: |${cursor.getString(cursor.getColumnIndex(PATENTE))}|")
-//                println("La $MARCA  es: |${cursor.getString(cursor.getColumnIndex(MARCA))}|")
-//                println("La $COLOR  es: |${cursor.getString(cursor.getColumnIndex(COLOR))}|")
-//                println("La $FOREINGUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(FOREINGUSUARIO))}|")
-//                println("___________________________________________________________________________")
+                println("____________________________datos usuario___________________________________")
+                println("el $IDUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(IDUSUARIO))}|")
+                println("el $NOMBRES  es: |${cursor.getString(cursor.getColumnIndex(NOMBRES))}|")
+                println("el $APELLIDOS  es: |${cursor.getString(cursor.getColumnIndex(APELLIDOS))}|")
+                println("el $RUT  es: |${cursor.getString(cursor.getColumnIndex(RUT))}|")
+                println("el $TELEFONO  es: |${cursor.getString(cursor.getColumnIndex(TELEFONO))}|")
+                println("el $CORREO  es: |${cursor.getString(cursor.getColumnIndex(CORREO))}|")
+                println("el $SEGURO  es: |${cursor.getString(cursor.getColumnIndex(SEGURO))}|")
+                println("_____________________________datos vehiculo________________________________")
+                println("La $IDVEHICULO  es: |${cursor.getString(cursor.getColumnIndex(IDVEHICULO))}|")
+                println("La $MARCA  es: |${cursor.getString(cursor.getColumnIndex(MARCA))}|")
+                println("La $PATENTE  es: |${cursor.getString(cursor.getColumnIndex(PATENTE))}|")
+                println("La $MARCA  es: |${cursor.getString(cursor.getColumnIndex(MARCA))}|")
+                println("La $COLOR  es: |${cursor.getString(cursor.getColumnIndex(COLOR))}|")
+                println("La $FOREINGUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(FOREINGUSUARIO))}|")
+                println("___________________________________________________________________________")
 
                 usuario.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(IDUSUARIO)))
                 usuario.nombres = cursor.getString(cursor.getColumnIndex(NOMBRES))
@@ -213,60 +214,8 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 usuario.fotoLicencia = cursor.getString(cursor.getColumnIndex(FOTOLICENCIA))
                 usuario.fotoQR = cursor.getString(cursor.getColumnIndex(FOTOQR))
                 usuario.vehiculo = vehiculoUsuario
+                cursor.moveToNext()
                 break
-            }
-        }
-        cursor.close()
-        return usuario
-    }
-
-    fun verUsuarios(): Usuario {
-        val usuario = Usuario()
-        val vehiculoUsuario = VehiculoUsuario()
-        val db = writableDatabase
-        val selectQuery = "SELECT * FROM $TABLE_NAME_USUARIO "
-        val cursor = db.rawQuery(selectQuery, null)
-        if (cursor != null) {
-            cursor.moveToFirst()
-            while (cursor.moveToNext()) {
-                //Datos de usuario
-                println("____________________________datos usuario___________________________________")
-                println("el $IDUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(IDUSUARIO))}|")
-                println("el $NOMBRES  es: |${cursor.getString(cursor.getColumnIndex(NOMBRES))}|")
-                println("el $APELLIDOS  es: |${cursor.getString(cursor.getColumnIndex(APELLIDOS))}|")
-                println("el $RUT  es: |${cursor.getString(cursor.getColumnIndex(RUT))}|")
-                println("el $TELEFONO  es: |${cursor.getString(cursor.getColumnIndex(TELEFONO))}|")
-                println("el $CORREO  es: |${cursor.getString(cursor.getColumnIndex(CORREO))}|")
-                println("el $SEGURO  es: |${cursor.getString(cursor.getColumnIndex(SEGURO))}|")
-                println("el $FOTOCARNET  es: |${cursor.getString(cursor.getColumnIndex(FOTOCARNET))}|")
-//                println("___________________________________________________________________________")
-
-//                break
-            }
-        }
-        cursor.close()
-        return usuario
-    }
-
-    fun verVehiculos(): Usuario {
-        val usuario = Usuario()
-        val vehiculoUsuario = VehiculoUsuario()
-        val db = writableDatabase
-        val selectQuery = "SELECT * FROM $TABLE_NAME_VEHICULO "
-        val cursor = db.rawQuery(selectQuery, null)
-        if (cursor != null) {
-            cursor.moveToFirst()
-            while (cursor.moveToNext()) {
-                //Datos de usuario
-                println("_____________________________datos vehiculo________________________________")
-                println("La $IDVEHICULO  es: |${cursor.getString(cursor.getColumnIndex(IDVEHICULO))}|")
-                println("La $MARCA  es: |${cursor.getString(cursor.getColumnIndex(MARCA))}|")
-                println("La $PATENTE  es: |${cursor.getString(cursor.getColumnIndex(PATENTE))}|")
-                println("La $MARCA  es: |${cursor.getString(cursor.getColumnIndex(MARCA))}|")
-                println("La $COLOR  es: |${cursor.getString(cursor.getColumnIndex(COLOR))}|")
-                println("La $FOREINGUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(FOREINGUSUARIO))}|")
-
-//                break
             }
         }
         cursor.close()
@@ -280,8 +229,9 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         val cursor = db.rawQuery(selectQuery, null)
         if (cursor != null) {
             cursor.moveToFirst()
-            while (cursor.moveToNext()) {
+            while (cursor.isAfterLast == false) {
                 existe = true
+                cursor.moveToNext()
                 break
             }
         }

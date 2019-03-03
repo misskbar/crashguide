@@ -48,41 +48,6 @@ class OnBoardingFragment : BaseFragment() {
 
         dbHandler = DataBaseHelper(context!!)
 
-
-        if(!dbHandler!!.existsUsuario()){
-            val vehiculo = VehiculoUsuario(0,"Marca","Modelo","patente",0,"Plomo",0)
-
-            val usuario = Usuario(0,"Oswaldo","Lopez","rut",0,"correo","Si","","","",vehiculo)
-
-            var id = dbHandler!!.addUsuario(usuario)
-            println("id $id")
-            var agrego = dbHandler!!.addVehiculo(vehiculo, id.toInt())
-            println("Agrego el prime vehiculo: $agrego")
-//            dbHandler!!.deleteAllVehiculo()
-//            dbHandler!!.deleteAllUsuario()
-        }
-
-//        println("Nombre ${dbHandler!!.getUsuario().nombres}")
-
-        println("")
-        println("")
-        println("")
-        dbHandler!!.getUsuario()
-        println("LISTA DE USUARIOS \n\n")
-        dbHandler!!.verUsuarios()
-        println("LISTA DE VEHICULOS \n\n")
-        dbHandler!!.verVehiculos()
-
-//        println(dbHandler!!.existsUsuario())
-//        println("Nombre ${dbHandler!!.getUsuario().nombres}")
-//
-//        id = dbHandler!!.addUsuario(usuario)
-//        println("id $id")
-//        dbHandler!!.addVehiculo(vehiculo, id.toInt())
-//
-//        println(dbHandler!!.existsUsuario())
-//        println("Nombre ${dbHandler!!.getUsuario().nombres}")
-
         startButton.setOnClickListener(View.OnClickListener { navigator.showIsAnyInjured(activity!!)})
 
         login.setOnClickListener( View.OnClickListener {
