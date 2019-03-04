@@ -11,6 +11,7 @@ import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_third_party_list.*
 import javax.inject.Inject
 import android.transition.Explode
+import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.features.signup.Usuario
 import com.fernandocejas.sample.features.signup.VehiculoUsuario
 import com.itextpdf.text.*
@@ -45,6 +46,8 @@ class ThirdPartyListFragment : BaseFragment() {
     val subFont = Font(Font.FontFamily.TIMES_ROMAN, 16f, Font.BOLD);
     val smallBold = Font(Font.FontFamily.TIMES_ROMAN, 12f, Font.BOLD);
 
+    var dbHandler: DataBaseHelper? = null
+
     override fun layoutId() = R.layout.fragment_third_party_list
 
 
@@ -60,6 +63,8 @@ class ThirdPartyListFragment : BaseFragment() {
         super.onViewCreated(view, savedInstanceState)
         // Creates a vertical Layout Manager
         listaTerceros.layoutManager = LinearLayoutManager(activity!!)
+
+        dbHandler = DataBaseHelper(context!!)
 
         // Access the RecyclerView Adapter and load the data into it
         listaTerceros.adapter = ThirdPartyAdapter(AndroidApplication.globalListTerceros, activity!!)
@@ -98,6 +103,10 @@ class ThirdPartyListFragment : BaseFragment() {
                 "Fecha: "  + Date(), smallBold))
         addEmptyLine(preface, 3)
 
+        preface.add(Paragraph(
+                "Ubicación del accidente: "  + AndroidApplication.ubicacionAccidente, smallBold))
+        addEmptyLine(preface, 3)
+
 
 //        preface.add(Paragraph(
 //                "This document is a preliminary version and not subject to your license agreement or any other agreement with vogella.de ;-).",
@@ -116,10 +125,7 @@ class ThirdPartyListFragment : BaseFragment() {
         // Second parameter is the number of the chapter
         var catPart = Chapter(Paragraph(anchor), 1)
 
-        val vehiculo = VehiculoUsuario(0,"Marca","Modelo","patente",0,"Plomo",0)
-
-        val usuario = Usuario(0,"Oswaldo","Lopez","rut",0,"correo","Si","/storage/emulated/0/Pictures/1551423549109.jpg","/storage/emulated/0/Pictures/1551423549109.jpg","",vehiculo)
-
+        val usuario = dbHandler!!.getUsuario()
         addUserInformation(usuario, catPart)
 
         // Add a list
@@ -222,13 +228,13 @@ class ThirdPartyListFragment : BaseFragment() {
             subCatPart.add(Paragraph("RUT: ${tercero.rut}"))
             subCatPart.add(Paragraph("Telefono: ${tercero.telefono}"))
             subCatPart.add(Paragraph("Correo electronico: ${tercero.correo}"))
-            subCatPart.add(Paragraph("Foto de Carnet: ${tercero.fotoCarnet}"))
+            subCatPart.add(Paragraph("Foto de Carnet:"))
             var image = Image.getInstance (tercero.fotoCarnet)
             image.setAlignment(Image.MIDDLE )
             image.scaleToFit(300f, 600f)
             subCatPart.add(image)
 
-            subCatPart.add(Paragraph("Foto licencia de conducir: ${tercero.fotoLicencia}"))
+            subCatPart.add(Paragraph("Foto licencia de conducir:"))
             image = Image.getInstance (tercero.fotoLicencia)
             image.setAlignment(Image.MIDDLE )
             image.scaleToFit(300f, 600f)

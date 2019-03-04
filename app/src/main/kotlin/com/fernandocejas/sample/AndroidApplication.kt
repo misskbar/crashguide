@@ -29,6 +29,7 @@ class AndroidApplication : Application() {
 
     companion object {
         val globalListTerceros: ArrayList<Terceros> = ArrayList<Terceros>()
+        var ubicacionAccidente = ""
     }
 
     val appComponent: ApplicationComponent by lazy(mode = LazyThreadSafetyMode.NONE) {

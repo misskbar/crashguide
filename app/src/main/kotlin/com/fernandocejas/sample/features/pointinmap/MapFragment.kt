@@ -16,6 +16,7 @@ import android.util.Log
 import android.view.View
 import android.widget.AdapterView
 import android.widget.AutoCompleteTextView
+import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.R
 import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.core.navigation.Navigator
@@ -85,9 +86,11 @@ class MapFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleLi
 
         val center = mMap.cameraPosition.target
         val geocoder = Geocoder(context, Locale.getDefault())
-        if (geocoder.getFromLocation(center.latitude, center.longitude, 1).size > 0)
+        if (geocoder.getFromLocation(center.latitude, center.longitude, 1).size > 0){
             address.setText(geocoder.getFromLocation(center.latitude, center.longitude, 1)[0].getAddressLine(0).toString().split(",")[0])
-        address.setSelection(address.getText().length)
+            AndroidApplication.ubicacionAccidente = geocoder.getFromLocation(center.latitude, center.longitude, 1)[0].getAddressLine(0).toString().split(",")[0]
+        }
+            address.setSelection(address.getText().length)
         address.dismissDropDown()
 
     }
@@ -222,6 +225,7 @@ class MapFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleLi
                     val geocoder = Geocoder(context, Locale.getDefault())
                     if (geocoder.getFromLocation(latitude, longitude, 1).size > 0) {
                         address.setText(geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0).toString().split(",")[0])
+                        AndroidApplication.ubicacionAccidente = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0).toString().split(",")[0]
                         address.setSelection(address.getText().length)
                         address.dismissDropDown()
                     }
