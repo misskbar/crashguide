@@ -1,5 +1,7 @@
 package com.fernandocejas.sample.features.thridpartyinformation
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
 import android.support.v7.widget.LinearLayoutManager
@@ -78,8 +80,27 @@ class ThirdPartyListFragment : BaseFragment() {
             addTitlePage(document)
             addContent(document)
             document.close()
+
+            sendEmail()
+
         })
 
+    }
+
+    private fun sendEmail(){
+        var emailIntent =  Intent(Intent.ACTION_SEND);
+        emailIntent.setType("text/plain");
+        emailIntent.putExtra(Intent.EXTRA_SUBJECT, "subject here");
+        emailIntent.putExtra(Intent.EXTRA_TEXT, "body text");
+        var root = Environment.getExternalStorageDirectory();
+        var pathToMyAttachedFile = "temp/attachement.xml";
+        var file = File(Environment.getExternalStorageDirectory().toString()+File.separator+"firstPdf.pdf")
+        if (!file.exists() || !file.canRead()) {
+            return;
+        }
+        var uri = Uri.fromFile(file);
+        emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
+        startActivity(Intent.createChooser(emailIntent, "Pick an Email provider"));
     }
 
 
