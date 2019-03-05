@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Environment
+import android.support.v4.content.FileProvider
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
 import com.fernandocejas.sample.AndroidApplication
@@ -13,6 +14,7 @@ import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_third_party_list.*
 import javax.inject.Inject
 import android.transition.Explode
+import com.fernandocejas.sample.BuildConfig
 import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.features.signup.Usuario
 import com.fernandocejas.sample.features.signup.VehiculoUsuario
@@ -98,7 +100,10 @@ class ThirdPartyListFragment : BaseFragment() {
         if (!file.exists() || !file.canRead()) {
             return;
         }
-        var uri = Uri.fromFile(file);
+//        var uri = Uri.fromFile(file);
+        var uri = FileProvider.getUriForFile(activity!!,
+                BuildConfig.APPLICATION_ID + ".provider",
+                file);
         emailIntent.putExtra(Intent.EXTRA_STREAM, uri);
         startActivity(Intent.createChooser(emailIntent, "Pick an Email provider"));
     }
