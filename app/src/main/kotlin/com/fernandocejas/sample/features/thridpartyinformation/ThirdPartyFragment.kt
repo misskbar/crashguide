@@ -83,18 +83,47 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
 
             }
         }else if (v.id == nextButton.id) {
-            if(
-                    validateEmpty(firstName) && validateEmpty(surname) && validateEmpty(rut) &&
-                    validateEmpty(telefono) && validateEmpty(email) &&
-                    validateEmptySpinner(spinner) && validateEmptyPath(idPath, textIdCapture) &&
-                    validateEmptyPath(driverLicencePath, textDriverLicenceCapture) &&
-                    validateEmpty(brand) && validateEmpty(model) &&
-                    validateEmpty(registrationNumber) && validateEmpty(year) && validateEmpty(color)){
+            if(validateData()){
                 saveThirdPartyInformation()
                 navigator.showThirdPartyList(activity!!)
             }
 
         }
+    }
+
+    private fun validateData() : Boolean{
+        var empty = true;
+
+        validateEmpty(firstName)
+        validateEmpty(surname)
+        validateEmpty(rut)
+        validateEmpty(telefono)
+        validateEmpty(email)
+        validateEmptySpinner(spinner)
+        validateEmptyPath(idPath, textIdCapture)
+        validateEmptyPath(driverLicencePath, textDriverLicenceCapture)
+        validateEmpty(brand)
+        validateEmpty(model)
+        validateEmpty(registrationNumber)
+        validateEmpty(year)
+        validateEmpty(color)
+
+
+        empty = validateEmpty(firstName)
+        empty = if(empty) validateEmpty(surname) else false
+        empty = if(empty) validateEmpty(rut) else false
+        empty = if(empty) validateEmpty(telefono) else false
+        empty = if(empty) validateEmpty(email) else false
+        empty = if(empty) validateEmptySpinner(spinner) else false
+        empty = if(empty) validateEmptyPath(idPath, textIdCapture) else false
+        empty = if(empty) validateEmptyPath(driverLicencePath, textDriverLicenceCapture) else false
+        empty = if(empty) validateEmpty(brand) else false
+        empty = if(empty) validateEmpty(model) else false
+        empty = if(empty) validateEmpty(registrationNumber) else false
+        empty = if(empty) validateEmpty(year) else false
+        empty = if(empty) validateEmpty(color) else false
+
+        return empty
     }
 
     private fun validateEmpty(editText: EditText): Boolean{
