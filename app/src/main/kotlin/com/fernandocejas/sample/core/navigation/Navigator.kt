@@ -24,8 +24,8 @@ import android.support.v4.app.FragmentActivity
 import android.view.View
 import android.widget.ImageView
 import com.fernandocejas.sample.core.extension.empty
+import com.fernandocejas.sample.features.contacs.ContactsActivity
 import com.fernandocejas.sample.features.generateQR.GenerateQRActivity
-import com.fernandocejas.sample.features.generateQR.GenerateQRFragment
 import com.fernandocejas.sample.features.injured.InjuredActivity
 import com.fernandocejas.sample.features.movies.MovieDetailsActivity
 import com.fernandocejas.sample.features.movies.MovieView
@@ -82,6 +82,8 @@ class Navigator
     fun showThirdPartyInformation(context: Context, extra: String) = context.startActivity(ThirdPartyActivity.callingIntent(context,extra))
 
     fun showSignUp(context: Context) = context.startActivity(SignUpActivity.callingIntent(context))
+
+    fun showContacts(context: Context) = context.startActivity(ContactsActivity.callingIntent(context))
 
     fun showSignUp(context: Context, callingActivity: Int) {
 

@@ -18,6 +18,7 @@ package com.fernandocejas.sample.core.di
 import com.fernandocejas.sample.AndroidApplication
 import com.fernandocejas.sample.core.di.viewmodel.ViewModelModule
 import com.fernandocejas.sample.core.navigation.RouteActivity
+import com.fernandocejas.sample.features.contacs.ContacsFragment
 import com.fernandocejas.sample.features.generateQR.GenerateQRFragment
 import com.fernandocejas.sample.features.injured.InjuredFragment
 import com.fernandocejas.sample.features.movies.MovieDetailsFragment
@@ -58,5 +59,7 @@ interface ApplicationComponent {
     fun inject (generateQRFragment: GenerateQRFragment)
 
     fun inject (ThirdPartyListFragment: ThirdPartyListFragment)
+
+    fun inject (contacsFragment: ContacsFragment)
 
 }

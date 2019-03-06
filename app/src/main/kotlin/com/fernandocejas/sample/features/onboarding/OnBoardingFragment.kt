@@ -50,6 +50,8 @@ class OnBoardingFragment : BaseFragment() {
 
         startButton.setOnClickListener(View.OnClickListener { navigator.showIsAnyInjured(activity!!)})
 
+        contacts.setOnClickListener(View.OnClickListener { navigator.showContacts(activity!!)})
+
         login.setOnClickListener( View.OnClickListener {
 
             if(dbHandler!!.existsUsuario()){

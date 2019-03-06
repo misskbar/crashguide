@@ -46,6 +46,15 @@
             android:layout_marginTop="34dp"
             app:srcCompat="@mipmap/login" />
 
+        <ImageView
+            android:id="@+id/contacts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/startButton"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="37dp"
+            app:srcCompat="@mipmap/login" />
+
 
     </RelativeLayout>
 </RelativeLayout>

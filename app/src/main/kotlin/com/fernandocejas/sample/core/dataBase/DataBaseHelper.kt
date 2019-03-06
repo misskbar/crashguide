@@ -4,6 +4,8 @@ import android.content.ContentValues
 import android.content.Context
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
+import android.provider.ContactsContract
+import com.fernandocejas.sample.features.contacs.Contacts
 import com.fernandocejas.sample.features.signup.Usuario
 import com.fernandocejas.sample.features.signup.VehiculoUsuario
 
@@ -36,7 +38,10 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         private val COLOR = "Color"
         private val FOREINGUSUARIO = "Usuario_id"
 
-
+        private val TABLE_NAME_CONTACTO = "Contacto"
+        private val IDCONTACTO = "C_Id"
+        private val NOMBRECONTACTO = "Nombre"
+        private val NUMEROCONTACTO = "Numero"
     }
 
     override fun onCreate(db: SQLiteDatabase) {
@@ -63,6 +68,12 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 FOREINGUSUARIO + " INTEGER," +
                 "FOREIGN KEY($FOREINGUSUARIO) REFERENCES $TABLE_NAME_USUARIO($IDUSUARIO));"
         db.execSQL(CREATE_TABLE_VEHICULO)
+
+        val CREATE_TABLE_CONTACTO = "CREATE TABLE $TABLE_NAME_CONTACTO (" +
+                IDCONTACTO + " INTEGER PRIMARY KEY," +
+                NOMBRECONTACTO + " TEXT," +
+                NUMEROCONTACTO + " TEXT);"
+        db.execSQL(CREATE_TABLE_CONTACTO)
     }
 
     override fun onUpgrade(db: SQLiteDatabase, oldVersion: Int, newVersion: Int) {
@@ -71,6 +82,9 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
 
         val DROP_TABLE_USUARIO = "DROP TABLE IF EXISTS $TABLE_NAME_USUARIO"
         db.execSQL(DROP_TABLE_USUARIO)
+
+        val DROP_TABLE_CONTACTO = "DROP TABLE IF EXISTS $TABLE_NAME_CONTACTO"
+        db.execSQL(DROP_TABLE_CONTACTO)
         onCreate(db)
     }
 
@@ -85,6 +99,16 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         values.put(COLOR, vehiculo.color)
         values.put(FOREINGUSUARIO, idUsuario)
         val _success = db.insert(TABLE_NAME_VEHICULO, null, values)
+        db.close()
+        return (Integer.parseInt("$_success") != -1)
+    }
+
+    fun addContacto(contacts: Contacts): Boolean {
+        val db = this.writableDatabase
+        val values = ContentValues()
+        values.put(NOMBRECONTACTO, contacts.nombres)
+        values.put(NUMEROCONTACTO, contacts.telefono)
+        val _success = db.insert(TABLE_NAME_CONTACTO, null, values)
         db.close()
         return (Integer.parseInt("$_success") != -1)
     }
@@ -167,6 +191,13 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         return Integer.parseInt("$_success") != -1
     }
 
+    fun deleteContacto(_id: Int): Boolean {
+        val db = this.writableDatabase
+        val _success = db.delete(TABLE_NAME_CONTACTO, IDCONTACTO + "=?", arrayOf(_id.toString())).toLong()
+        db.close()
+        return Integer.parseInt("$_success") != -1
+    }
+
     fun getUsuario(): Usuario {
         val usuario = Usuario()
         val vehiculoUsuario = VehiculoUsuario()
@@ -186,23 +217,6 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 vehiculoUsuario.ano = cursor.getInt(cursor.getColumnIndex(ANO))
                 vehiculoUsuario.color = cursor.getString(cursor.getColumnIndex(COLOR))
                 //Datos de usuario
-                println("____________________________datos usuario___________________________________")
-                println("el $IDUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(IDUSUARIO))}|")
-                println("el $NOMBRES  es: |${cursor.getString(cursor.getColumnIndex(NOMBRES))}|")
-                println("el $APELLIDOS  es: |${cursor.getString(cursor.getColumnIndex(APELLIDOS))}|")
-                println("el $RUT  es: |${cursor.getString(cursor.getColumnIndex(RUT))}|")
-                println("el $TELEFONO  es: |${cursor.getString(cursor.getColumnIndex(TELEFONO))}|")
-                println("el $CORREO  es: |${cursor.getString(cursor.getColumnIndex(CORREO))}|")
-                println("el $SEGURO  es: |${cursor.getString(cursor.getColumnIndex(SEGURO))}|")
-                println("_____________________________datos vehiculo________________________________")
-                println("La $IDVEHICULO  es: |${cursor.getString(cursor.getColumnIndex(IDVEHICULO))}|")
-                println("La $MARCA  es: |${cursor.getString(cursor.getColumnIndex(MARCA))}|")
-                println("La $PATENTE  es: |${cursor.getString(cursor.getColumnIndex(PATENTE))}|")
-                println("La $MARCA  es: |${cursor.getString(cursor.getColumnIndex(MARCA))}|")
-                println("La $COLOR  es: |${cursor.getString(cursor.getColumnIndex(COLOR))}|")
-                println("La $FOREINGUSUARIO  es: |${cursor.getString(cursor.getColumnIndex(FOREINGUSUARIO))}|")
-                println("___________________________________________________________________________")
-
                 usuario.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(IDUSUARIO)))
                 usuario.nombres = cursor.getString(cursor.getColumnIndex(NOMBRES))
                 usuario.apellidos = cursor.getString(cursor.getColumnIndex(APELLIDOS))
@@ -220,6 +234,28 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         }
         cursor.close()
         return usuario
+    }
+
+    fun getContactos(): ArrayList<Contacts> {
+        var lista = ArrayList<Contacts>()
+
+        val db = writableDatabase
+        val selectQuery = "SELECT * FROM $TABLE_NAME_CONTACTO "
+        val cursor = db.rawQuery(selectQuery, null)
+        if (cursor != null) {
+            cursor.moveToFirst()
+            while (!cursor.isAfterLast) {
+                var contacts = Contacts()
+                contacts.id = Integer.parseInt(cursor.getString(cursor.getColumnIndex(IDCONTACTO)))
+                contacts.nombres = cursor.getString(cursor.getColumnIndex(NOMBRECONTACTO))
+                contacts.telefono = cursor.getString(cursor.getColumnIndex(NUMEROCONTACTO))
+                println("contacto ${contacts.nombres}")
+                lista.add(contacts)
+                cursor.moveToNext()
+            }
+        }
+        cursor.close()
+        return lista
     }
 
     fun existsUsuario(): Boolean {

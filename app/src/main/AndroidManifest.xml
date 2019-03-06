@@ -78,6 +78,7 @@
             android:name=".features.movies.MovieDetailsActivity"
             android:label="@string/movie_details_screen_title"
             android:theme="@style/AppTheme.Translucent" />
+
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="${applicationId}.provider"
@@ -85,7 +86,7 @@
             android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
-                android:resource="@xml/provider_paths"/>
+                android:resource="@xml/provider_paths" />
         </provider>
 
         <!--
@@ -104,7 +105,8 @@
             android:name=".features.pointinmap.MapActivity"
             android:label="@string/title_activity_maps" />
         <activity android:name=".features.thridpartyinformation.ThirdPartyListActivity" />
-        <activity android:name=".features.thridpartyinformation.ScanQRActivity"></activity>
+        <activity android:name=".features.thridpartyinformation.ScanQRActivity" />
+        <activity android:name=".features.contacs.ContactsActivity"></activity>
     </application>
 
 </manifest>
