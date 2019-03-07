@@ -33,6 +33,7 @@ import com.fernandocejas.sample.features.movies.MoviesActivity
 import com.fernandocejas.sample.features.onboarding.Authenticator
 import com.fernandocejas.sample.features.onboarding.IsAnyInjuredActivity
 import com.fernandocejas.sample.features.onboarding.OnBoardingActivity
+import com.fernandocejas.sample.features.onboarding.SendSMSActivity
 import com.fernandocejas.sample.features.pointinmap.MapActivity
 import com.fernandocejas.sample.features.signup.SignUpActivity
 import com.fernandocejas.sample.features.thridpartyinformation.ScanQRActivity
@@ -84,6 +85,8 @@ class Navigator
     fun showSignUp(context: Context) = context.startActivity(SignUpActivity.callingIntent(context))
 
     fun showContacts(context: Context) = context.startActivity(ContactsActivity.callingIntent(context))
+
+    fun showSendSMS(context: Context) = context.startActivity(SendSMSActivity.callingIntent(context))
 
     fun showSignUp(context: Context, callingActivity: Int) {
 

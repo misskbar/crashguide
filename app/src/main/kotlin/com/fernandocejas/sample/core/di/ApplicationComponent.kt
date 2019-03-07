@@ -25,6 +25,7 @@ import com.fernandocejas.sample.features.movies.MovieDetailsFragment
 import com.fernandocejas.sample.features.movies.MoviesFragment
 import com.fernandocejas.sample.features.onboarding.IsAnyInjuredFragment
 import com.fernandocejas.sample.features.onboarding.OnBoardingFragment
+import com.fernandocejas.sample.features.onboarding.SendSMSFragment
 import com.fernandocejas.sample.features.pointinmap.MapFragment
 import com.fernandocejas.sample.features.signup.SignUpFragment
 import com.fernandocejas.sample.features.thridpartyinformation.ScanQRActivity
@@ -61,5 +62,7 @@ interface ApplicationComponent {
     fun inject (ThirdPartyListFragment: ThirdPartyListFragment)
 
     fun inject (contacsFragment: ContacsFragment)
+
+    fun inject (sendSMSFragment: SendSMSFragment)
 
 }

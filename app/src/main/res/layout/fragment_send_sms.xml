@@ -1,0 +1,57 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/scrim">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@mipmap/shadow"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginTop="178dp"
+            android:gravity="center"
+            android:text="@string/send_sms"
+            android:textColor="@color/black" />
+
+
+        <Button
+            android:id="@+id/negativeButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"
+            android:layout_marginBottom="180dp"
+            android:layout_marginStart="48dp"
+            android:background="@drawable/button"
+            android:clickable="true"
+            android:text="@string/no"
+            android:textColor="@color/white" />
+
+        <Button
+            android:id="@+id/possitiveButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/negativeButton"
+            android:layout_marginBottom="180dp"
+            android:layout_marginEnd="48dp"
+            android:background="@drawable/button"
+            android:clickable="true"
+            android:text="@string/yes"
+            android:textColor="@color/white" />
+
+
+    </RelativeLayout>
+</RelativeLayout>

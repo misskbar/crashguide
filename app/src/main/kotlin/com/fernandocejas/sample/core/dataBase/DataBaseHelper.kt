@@ -274,4 +274,21 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         cursor.close()
         return existe
     }
+
+    fun existsContacts(): Boolean {
+        var existe = false
+        val db = writableDatabase
+        val selectQuery = "SELECT * FROM $TABLE_NAME_CONTACTO"
+        val cursor = db.rawQuery(selectQuery, null)
+        if (cursor != null) {
+            cursor.moveToFirst()
+            while (cursor.isAfterLast == false) {
+                existe = true
+                cursor.moveToNext()
+                break
+            }
+        }
+        cursor.close()
+        return existe
+    }
 }

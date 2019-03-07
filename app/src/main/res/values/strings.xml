@@ -39,7 +39,9 @@
     <string name="textFABWrite">Escribir datos</string>
     <string name="error">Por favor ingrese este dato</string>
     <string name="this_qr">Usa este QR para enviar tu información</string>
+    <string name="send_sms">¿Deseas enviarle a tus contactos de emergencia un sms para indicarles que haz tenido un accidente?</string>
 
+    <string name="sms_text">Acabo de tener un accidente</string>
 
     <string-array name="has_protection">
         <item>¿Posee seguro automotriz?</item>

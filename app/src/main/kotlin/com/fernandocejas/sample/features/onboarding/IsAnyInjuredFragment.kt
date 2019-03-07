@@ -18,6 +18,7 @@ package com.fernandocejas.sample.features.onboarding
 import android.os.Bundle
 import android.view.View
 import com.fernandocejas.sample.R
+import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.core.navigation.Navigator
 import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_is_any_injured.*
@@ -27,6 +28,8 @@ class IsAnyInjuredFragment : BaseFragment() {
 
     @Inject
     lateinit var navigator: Navigator
+
+    var dbHandler: DataBaseHelper? = null
 
     override fun layoutId() = R.layout.fragment_is_any_injured
 
@@ -40,10 +43,18 @@ class IsAnyInjuredFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        dbHandler = DataBaseHelper(context!!)
 
         possitiveButton.setOnClickListener(View.OnClickListener { v -> navigator.showInjured(activity!!)})
 
-        negativeButton.setOnClickListener(View.OnClickListener { v -> navigator.showMap(activity!!) })
+        negativeButton.setOnClickListener(View.OnClickListener {
+            if(dbHandler!!.existsContacts()){
+                navigator.showSendSMS(activity!!)
+            }else{
+                navigator.showMap(activity!!)
+            }
+
+        })
     }
 
 }
