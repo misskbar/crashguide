@@ -13,46 +13,41 @@
         android:background="@mipmap/shadow"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_above="@+id/startButton"
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/black"
-            android:text="@string/did_you_have_a_crash" />
-
-        <Button
-            android:id="@+id/startButton"
+            android:layout_marginTop="108dp"
+            android:layout_above="@+id/tabDots" />
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tabDots"
+            android:layout_alignParentBottom="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:layout_marginBottom="66dp"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:background="@drawable/button"
-            android:clickable="true"
-            android:text="@string/start"
-            android:textColor="@color/white" />
+            app:tabBackground="@drawable/tab_selector"
+            app:tabGravity="center"
+            app:tabIndicatorHeight="0dp"/>
+
 
         <ImageView
             android:id="@+id/login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignEnd="@+id/startButton"
+            android:layout_alignEnd="@+id/pager"
             android:layout_alignParentTop="true"
             android:layout_marginTop="34dp"
+            android:layout_marginRight="20dp"
             app:srcCompat="@mipmap/login" />
 
         <ImageView
             android:id="@+id/contacts"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignStart="@+id/startButton"
+            android:layout_alignStart="@+id/pager"
             android:layout_alignParentTop="true"
-            android:layout_marginTop="37dp"
+            android:layout_marginTop="34dp"
+            android:layout_marginLeft="20dp"
             app:srcCompat="@mipmap/login" />
 
 

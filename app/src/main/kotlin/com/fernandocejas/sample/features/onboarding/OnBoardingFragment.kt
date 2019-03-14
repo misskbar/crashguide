@@ -48,7 +48,9 @@ class OnBoardingFragment : BaseFragment() {
 
         dbHandler = DataBaseHelper(context!!)
 
-        startButton.setOnClickListener(View.OnClickListener { navigator.showIsAnyInjured(activity!!)})
+        pager.adapter = OnboardingAdapter(childFragmentManager)
+
+        tabDots.setupWithViewPager(pager)
 
         contacts.setOnClickListener(View.OnClickListener { navigator.showContacts(activity!!)})
 
