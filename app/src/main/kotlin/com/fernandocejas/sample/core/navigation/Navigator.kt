@@ -36,9 +36,7 @@ import com.fernandocejas.sample.features.onboarding.OnBoardingActivity
 import com.fernandocejas.sample.features.onboarding.SendSMSActivity
 import com.fernandocejas.sample.features.pointinmap.MapActivity
 import com.fernandocejas.sample.features.signup.SignUpActivity
-import com.fernandocejas.sample.features.thridpartyinformation.ScanQRActivity
-import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyActivity
-import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyListActivity
+import com.fernandocejas.sample.features.thridpartyinformation.*
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -86,6 +84,13 @@ class Navigator
 
     fun showContacts(context: Context) = context.startActivity(ContactsActivity.callingIntent(context))
 
+    fun showThirdPartyPhoto(context: Context) = context.startActivity(ThirdPartyPhotoActivity.callingIntent(context))
+
+    fun showThirdPartyPhoto(context: Context, positionArray: Int) {
+
+        context.startActivity(ThirdPartyPhotoActivity.callingIntent(context,positionArray))
+
+    }
     fun showSendSMS(context: Context) = context.startActivity(SendSMSActivity.callingIntent(context))
 
     fun showSignUp(context: Context, callingActivity: Int) {

@@ -1,0 +1,367 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/scrim">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_centerInParent="true"
+        android:layout_margin="10dp"
+        android:background="@mipmap/shadow"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="100dp"
+            android:gravity="center">
+           <TextView
+               android:layout_width="match_parent"
+               android:layout_height="wrap_content"
+               android:gravity="center_horizontal"
+               android:text="Ahora agregue las fotos del vehiculo del involucrado:"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture1"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Frontal"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture2"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="Trasera"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture3"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Lado derecho"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture4"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture4"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:text="Lado izquierdo"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture5"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="Frontal derecho"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture6"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_horizontal"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Frontal izquierdo"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture7"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture7"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:gravity="center_horizontal"
+                    android:text="Trasero izquierdo"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture8"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture8"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:text="Trasero derecho"
+                    android:textColor="@color/black"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <com.facebook.drawee.view.SimpleDraweeView
+                    android:id="@+id/Capture9"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/edittext"
+                    android:gravity="center_horizontal"
+                    android:layout_centerVertical="true"
+                    app:failureImageScaleType="center"
+                    app:placeholderImage="@drawable/ic_camera"
+                    app:placeholderImageScaleType="centerInside" />
+
+                <TextView
+                    android:id="@+id/textCapture9"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="10dp"
+                    android:text="Patente frontal"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:paddingBottom="20dp" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal">
+            <Button
+                android:id="@+id/continueButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_gravity="bottom"
+                android:layout_marginBottom="10dp"
+                android:layout_alignParentBottom="true"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/button"
+                android:clickable="true"
+                android:text="@string/next"
+                android:textColor="@color/white"  />
+        </LinearLayout>
+
+
+    </LinearLayout>
+</LinearLayout>

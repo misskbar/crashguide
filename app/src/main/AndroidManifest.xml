@@ -10,7 +10,7 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.SEND_SMS" />
 
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
@@ -108,7 +108,11 @@
         <activity android:name=".features.thridpartyinformation.ThirdPartyListActivity" />
         <activity android:name=".features.thridpartyinformation.ScanQRActivity" />
         <activity android:name=".features.contacs.ContactsActivity" />
-        <activity android:name=".features.onboarding.SendSMSActivity"></activity>
+        <activity android:name=".features.onboarding.SendSMSActivity" />
+        <activity
+            android:name=".features.thridpartyinformation.ThirdPartyPhotoActivity"
+            android:label="@string/title_activity_third_party_photo"
+            android:theme="@style/AppTheme"></activity>
     </application>
 
 </manifest>

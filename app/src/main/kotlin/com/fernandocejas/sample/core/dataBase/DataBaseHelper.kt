@@ -27,6 +27,15 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         private val FOTOCARNET = "FotoCarnet"
         private val FOTOLICENCIA = "FotoLicencia"
         private val FOTOQR = "FotoQR"
+        private val FOTOVEHICULO1 = "FotoVehiculo1"
+        private val FOTOVEHICULO2 = "FotoVehiculo2"
+        private val FOTOVEHICULO3 = "FotoVehiculo3"
+        private val FOTOVEHICULO4 = "FotoVehiculo4"
+        private val FOTOVEHICULO5 = "FotoVehiculo5"
+        private val FOTOVEHICULO6 = "FotoVehiculo6"
+        private val FOTOVEHICULO7 = "FotoVehiculo7"
+        private val FOTOVEHICULO8 = "FotoVehiculo8"
+        private val FOTOVEHICULO9 = "FotoVehiculo9"
 
 
         private val TABLE_NAME_VEHICULO = "Vehiculo"
@@ -55,7 +64,17 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 SEGURO + " TEXT," +
                 FOTOCARNET + " TEXT," +
                 FOTOLICENCIA + " TEXT,  " +
-                FOTOQR + " TEXT);"
+                FOTOQR + " TEXT," +
+                FOTOVEHICULO1 + " TEXT," +
+                FOTOVEHICULO2 + " TEXT," +
+                FOTOVEHICULO3 + " TEXT," +
+                FOTOVEHICULO4 + " TEXT," +
+                FOTOVEHICULO5 + " TEXT," +
+                FOTOVEHICULO6 + " TEXT," +
+                FOTOVEHICULO7 + " TEXT," +
+                FOTOVEHICULO8 + " TEXT," +
+                FOTOVEHICULO9 + " TEXT" +
+                ");"
         db.execSQL(CREATE_TABLE_USUARIO)
 
         val CREATE_TABLE_VEHICULO = "CREATE TABLE $TABLE_NAME_VEHICULO (" +
@@ -125,6 +144,15 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         values.put(FOTOCARNET, usuario.fotoCarnet)
         values.put(FOTOLICENCIA, usuario.fotoLicencia)
         values.put(FOTOQR, usuario.fotoQR)
+        values.put(FOTOVEHICULO1, usuario.fotoVechiculo1)
+        values.put(FOTOVEHICULO2, usuario.fotoVechiculo2)
+        values.put(FOTOVEHICULO3, usuario.fotoVechiculo3)
+        values.put(FOTOVEHICULO4, usuario.fotoVechiculo4)
+        values.put(FOTOVEHICULO5, usuario.fotoVechiculo5)
+        values.put(FOTOVEHICULO6, usuario.fotoVechiculo6)
+        values.put(FOTOVEHICULO7, usuario.fotoVechiculo7)
+        values.put(FOTOVEHICULO8, usuario.fotoVechiculo8)
+        values.put(FOTOVEHICULO9, usuario.fotoVechiculo9)
         val _success = db.insert(TABLE_NAME_USUARIO, null, values)
         db.close()
         return _success
@@ -155,6 +183,15 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
         values.put(FOTOCARNET, usuario.fotoCarnet)
         values.put(FOTOLICENCIA, usuario.fotoLicencia)
         values.put(FOTOQR, usuario.fotoQR)
+        values.put(FOTOVEHICULO1, usuario.fotoVechiculo1)
+        values.put(FOTOVEHICULO2, usuario.fotoVechiculo2)
+        values.put(FOTOVEHICULO3, usuario.fotoVechiculo3)
+        values.put(FOTOVEHICULO4, usuario.fotoVechiculo4)
+        values.put(FOTOVEHICULO5, usuario.fotoVechiculo5)
+        values.put(FOTOVEHICULO6, usuario.fotoVechiculo6)
+        values.put(FOTOVEHICULO7, usuario.fotoVechiculo7)
+        values.put(FOTOVEHICULO8, usuario.fotoVechiculo8)
+        values.put(FOTOVEHICULO9, usuario.fotoVechiculo9)
         val _success = db.update(TABLE_NAME_USUARIO, values, IDUSUARIO + "=?", arrayOf(usuario.id.toString())).toLong()
         db.close()
         return Integer.parseInt("$_success") != -1
@@ -227,6 +264,15 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 usuario.fotoCarnet = cursor.getString(cursor.getColumnIndex(FOTOCARNET))
                 usuario.fotoLicencia = cursor.getString(cursor.getColumnIndex(FOTOLICENCIA))
                 usuario.fotoQR = cursor.getString(cursor.getColumnIndex(FOTOQR))
+                usuario.fotoVechiculo1 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO1))
+                usuario.fotoVechiculo2 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO2))
+                usuario.fotoVechiculo3 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO3))
+                usuario.fotoVechiculo4 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO4))
+                usuario.fotoVechiculo5 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO5))
+                usuario.fotoVechiculo6 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO6))
+                usuario.fotoVechiculo7 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO7))
+                usuario.fotoVechiculo8 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO8))
+                usuario.fotoVechiculo9 = cursor.getString(cursor.getColumnIndex(FOTOVEHICULO9))
                 usuario.vehiculo = vehiculoUsuario
                 cursor.moveToNext()
                 break

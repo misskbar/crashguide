@@ -29,10 +29,7 @@ import com.fernandocejas.sample.features.onboarding.PageThreeFragment
 import com.fernandocejas.sample.features.onboarding.SendSMSFragment
 import com.fernandocejas.sample.features.pointinmap.MapFragment
 import com.fernandocejas.sample.features.signup.SignUpFragment
-import com.fernandocejas.sample.features.thridpartyinformation.ScanQRActivity
-import com.fernandocejas.sample.features.thridpartyinformation.ScanQRFragment
-import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyFragment
-import com.fernandocejas.sample.features.thridpartyinformation.ThirdPartyListFragment
+import com.fernandocejas.sample.features.thridpartyinformation.*
 import dagger.Component
 import javax.inject.Singleton
 
@@ -67,5 +64,7 @@ interface ApplicationComponent {
     fun inject (sendSMSFragment: SendSMSFragment)
 
     fun inject (pageThreeFragment: PageThreeFragment)
+
+    fun inject (thirdPartyPhotoFragment: ThirdPartyPhotoFragment)
 
 }

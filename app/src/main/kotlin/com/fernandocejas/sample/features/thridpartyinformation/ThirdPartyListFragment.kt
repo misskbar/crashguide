@@ -75,16 +75,17 @@ class ThirdPartyListFragment : BaseFragment() {
         fabQR.setOnClickListener( View.OnClickListener { navigator.showScanQR(activity!!) })
         fabWrite.setOnClickListener( View.OnClickListener { navigator.showThirdPartyInformation(activity!!) })
         createPDF.setOnClickListener( View.OnClickListener {
-            val document = Document()
-            PdfWriter.getInstance(document,  FileOutputStream(Environment.getExternalStorageDirectory().toString()+File.separator+"firstPdf.pdf"))
-            document.open()
-            addMetaData(document)
-            addTitlePage(document)
-            addContent(document)
-            document.close()
+//            val document = Document()
+//            PdfWriter.getInstance(document,  FileOutputStream(Environment.getExternalStorageDirectory().toString()+File.separator+"firstPdf.pdf"))
+//            document.open()
+//            addMetaData(document)
+//            addTitlePage(document)
+//            addContent(document)
+//            document.close()
+//
+//            sendEmail()
 
-            sendEmail()
-
+            navigator.showThirdPartyPhoto(activity!!,-1)
         })
 
     }

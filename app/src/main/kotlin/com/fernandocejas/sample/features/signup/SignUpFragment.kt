@@ -316,6 +316,15 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
                 idPath,
                 driverLicencePath,
                 "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
+                "",
                 vehiculo)
 
 
