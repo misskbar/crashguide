@@ -51,12 +51,8 @@ class OnBoardingFragment : BaseFragment() {
 
         dbHandler = DataBaseHelper(context!!)
 
-        var usuario = dbHandler!!.getUsuario()
-        println("El usuario es: "+ usuario.nombres + " y la foto del vechiculo es " + usuario.fotoVechiculo1 + " " + usuario.fotoVechiculo2 + " " + usuario.fotoVechiculo3 + " " + usuario.fotoVechiculo4 + " ");
         pager.adapter = OnboardingAdapter(childFragmentManager)
 
-        Vehiculo("","","",2000,"")
-        AndroidApplication.globalListTerceros.add(Terceros("third1","apellido1","",2000,"","","","","","","","","","","","","",Vehiculo("","","",2000,"")))
         tabDots.setupWithViewPager(pager)
 
         contacts.setOnClickListener(View.OnClickListener { navigator.showContacts(activity!!)})
