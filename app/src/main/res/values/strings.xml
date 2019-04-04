@@ -41,7 +41,9 @@
     <string name="this_qr">Usa este QR para enviar tu información</string>
     <string name="send_sms">¿Deseas enviarle a tus contactos de emergencia un sms para indicarles que haz tenido un accidente?</string>
 
+    <string name="contact_text">A continuación se muestran los contactos a los cuales se les enviará un SMS en caso de que ocurra un accidente.</string>
     <string name="sms_text">Acabo de tener un accidente</string>
+    <string name="text_fab_contact">Seleccionar contacto</string>
 
     <string-array name="has_protection">
         <item>¿Posee seguro automotriz?</item>

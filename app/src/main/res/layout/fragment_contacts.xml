@@ -11,9 +11,20 @@
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
         android:layout_margin="10dp"
+        android:gravity="center_horizontal"
         android:background="@mipmap/shadow"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textAlignment="center"
+            android:text="@string/contact_text"
+            android:textColor="@color/black" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/listaContactos"
@@ -41,16 +52,6 @@
         fab:fab_labelStyle="@style/Etiquetas"
         fab:fab_labelsPosition="left">
 
-
-        <com.getbase.floatingactionbutton.FloatingActionButton
-            android:id="@+id/fabQR"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            fab:fab_colorNormal="?attr/colorAccent"
-            fab:fab_icon="@android:drawable/ic_menu_camera"
-            fab:fab_size="mini"
-            fab:fab_title="@string/textFABQR" />
-
         <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabWrite"
             android:layout_width="wrap_content"
@@ -58,7 +59,7 @@
             fab:fab_colorNormal="?attr/colorAccent"
             fab:fab_icon="@android:drawable/ic_menu_edit"
             fab:fab_size="mini"
-            fab:fab_title="@string/textFABWrite" />
+            fab:fab_title="@string/text_fab_contact" />
 
     </com.getbase.floatingactionbutton.FloatingActionsMenu>
 
