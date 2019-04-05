@@ -51,27 +51,33 @@
         <activity
             android:name=".features.onboarding.OnBoardingActivity"
             android:label="@string/onboarding_screen_title"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".features.onboarding.IsAnyInjuredActivity"
             android:label="@string/is_any_injured_screen_title"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".features.injured.InjuredActivity"
             android:label="@string/injured_screen_title"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".features.thridpartyinformation.ThirdPartyActivity"
             android:label="@string/thirdpartyinformation"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".features.signup.SignUpActivity"
             android:label="SignUp Activity"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".features.generateQR.GenerateQRActivity"
             android:label="Generate QR"
-            android:theme="@style/Theme.Design.NoActionBar" />
+            android:theme="@style/Theme.Design.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity
             android:name=".features.movies.MoviesActivity"
             android:label="@string/movies_screen_title" />
