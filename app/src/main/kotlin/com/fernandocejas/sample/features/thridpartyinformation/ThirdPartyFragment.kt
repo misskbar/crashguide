@@ -82,6 +82,10 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
                 requestPermission()
 
             }
+        }else if (v.id == buttonQR.id) {
+
+                navigator.showScanQR(activity!!)
+
         }else if (v.id == nextButton.id) {
             if(validateData()){
                 saveThirdPartyInformation()
@@ -190,6 +194,7 @@ class ThirdPartyFragment : BaseFragment(), View.OnClickListener {
         driverLicenceCapture.setOnClickListener(this)
         idCapture.setOnClickListener(this)
         nextButton.setOnClickListener(this)
+        buttonQR.setOnClickListener(this)
         if(!idThird.isEmpty()){
             println("EL idThird en thirdparty es : $idThird")
             if(idThird.split(";").size == 1){
