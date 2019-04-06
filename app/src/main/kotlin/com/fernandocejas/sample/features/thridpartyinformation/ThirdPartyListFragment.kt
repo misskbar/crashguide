@@ -14,6 +14,7 @@ import com.fernandocejas.sample.core.platform.BaseFragment
 import kotlinx.android.synthetic.main.fragment_third_party_list.*
 import javax.inject.Inject
 import android.transition.Explode
+import android.widget.Toast
 import com.fernandocejas.sample.BuildConfig
 import com.fernandocejas.sample.core.dataBase.DataBaseHelper
 import com.fernandocejas.sample.features.signup.Usuario
@@ -70,7 +71,12 @@ class ThirdPartyListFragment : BaseFragment() {
         fabWrite.setOnClickListener( View.OnClickListener { navigator.showThirdPartyInformation(activity!!) })
         createPDF.setOnClickListener( View.OnClickListener {
 
-            navigator.showThirdPartyPhoto(activity!!,-1)
+            if(AndroidApplication.globalListTerceros.size != 0){
+                navigator.showThirdPartyPhoto(activity!!,-1)
+            }else{
+                Toast.makeText(activity!!,"Por favor agregue a los involucrados en el accidente",Toast.LENGTH_LONG).show()
+            }
+
         })
 
     }
