@@ -55,6 +55,15 @@
 
 
         <com.getbase.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fabMyQR"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            fab:fab_colorNormal="?attr/colorAccent"
+            fab:fab_icon="@mipmap/qrexample"
+            fab:fab_size="mini"
+            fab:fab_title="@string/textFABMyQR" />
+
+        <com.getbase.floatingactionbutton.FloatingActionButton
             android:id="@+id/fabQR"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

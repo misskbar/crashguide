@@ -76,6 +76,10 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
                 Navigator.activityThirdParty -> {
                     navigator.showThirdPartyInformation(activity!!)
                 }
+                Navigator.activityThirdPartyList -> {
+//                    navigator.showThirdPartyList(activity!!)
+                    activity!!.onBackPressed();
+                }
 
             }
         }
@@ -99,14 +103,16 @@ class GenerateQRFragment : BaseFragment(), View.OnClickListener {
         nextActivity = (activity as GenerateQRActivity ).nextActivity
 
         dbHandler = DataBaseHelper(context!!)
-        if(dbHandler!!.existsUsuario() && !dbHandler!!.getUsuario().fotoQR.isEmpty()){
-//            goHome = false
+
+        if(nextActivity == Navigator.activitySingUp){
             homeButton.text = getString(R.string.modify)
+        }
+
+        if(dbHandler!!.existsUsuario() && !dbHandler!!.getUsuario().fotoQR.isEmpty()){
+
             val bitmap = BitmapFactory.decodeFile(dbHandler!!.getUsuario().fotoQR)
             qrBarcode.setImageBitmap(bitmap)
         }else{
-//            goHome = true
-
             var singUpData = armarCadena()
             var bitmap = TextToImageEncode(singUpData)
             qrBarcode.setImageBitmap(bitmap)
