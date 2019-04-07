@@ -86,12 +86,19 @@ class MapFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleLi
 
         val center = mMap.cameraPosition.target
         val geocoder = Geocoder(context, Locale.getDefault())
-        if (geocoder.getFromLocation(center.latitude, center.longitude, 1).size > 0){
-            address.setText(geocoder.getFromLocation(center.latitude, center.longitude, 1)[0].getAddressLine(0).toString().split(",")[0])
-            AndroidApplication.ubicacionAccidente = geocoder.getFromLocation(center.latitude, center.longitude, 1)[0].getAddressLine(0).toString().split(",")[0]
+        try{
+            if (geocoder.getFromLocation(center.latitude, center.longitude, 1).size > 0){
+                address.setText(geocoder.getFromLocation(center.latitude, center.longitude, 1)[0].getAddressLine(0).toString().split(",")[0])
+//                AndroidApplication.ubicacionAccidente = geocoder.getFromLocation(center.latitude, center.longitude, 1)[0].getAddressLine(0).toString().split(",")[0]
+                address.setSelection(address.getText().length)
+                address.dismissDropDown()
+            }
+        }catch(e: Exception){
+
         }
-            address.setSelection(address.getText().length)
-        address.dismissDropDown()
+
+
+        AndroidApplication.ubicacionAccidente = address.getText().toString()
 
     }
 
@@ -223,12 +230,20 @@ class MapFragment : BaseFragment(), OnMapReadyCallback, GoogleMap.OnCameraIdleLi
                     isFirstTime = false
 
                     val geocoder = Geocoder(context, Locale.getDefault())
-                    if (geocoder.getFromLocation(latitude, longitude, 1).size > 0) {
-                        address.setText(geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0).toString().split(",")[0])
-                        AndroidApplication.ubicacionAccidente = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0).toString().split(",")[0]
-                        address.setSelection(address.getText().length)
-                        address.dismissDropDown()
+                    println("latitude: $latitude longitude: $longitude");
+                    try {
+                        if (geocoder.getFromLocation(latitude, longitude, 1).size > 0) {
+                            address.setText(geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0).toString().split(",")[0])
+//                            AndroidApplication.ubicacionAccidente = geocoder.getFromLocation(latitude, longitude, 1)[0].getAddressLine(0).toString().split(",")[0]
+                            AndroidApplication.ubicacionAccidente = address.getText().toString()
+                            address.setSelection(address.getText().length)
+                            address.dismissDropDown()
+                        }
                     }
+                    catch (e: Exception) {
+                        // handler
+                    }
+
                 }
             }
 
