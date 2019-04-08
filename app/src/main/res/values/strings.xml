@@ -40,6 +40,12 @@
     <string name="textFABWrite">Escribir datos</string>
     <string name="error">Por favor ingrese este dato</string>
     <string name="this_qr">Usa este QR para enviar tu información</string>
+    <string name="We_are_sorry_you_had_an_accident">Lamentamos que hayas tenido un accidente.</string>
+    <string name="enter_your_personal_information">Primero, ingresa tus datos personales en el boton de registro, arriba a la derecha.</string>
+    <string name="if_you_dont_do_it_now">(sino lo haces ahora lo puedes hacer durante el registro del accidente).</string>
+    <string name="add_contacts">Puedes agregar contactos a los cuales les quieres avisar que tuviste un accidente automaticamente.</string>
+    <string name="the_last_step">Por ultimo, debes ingregar la ubicación del accidente, indicar si hubo heridos y los datos de los conductores involucrados.</string>
+    <string name="if_qr">Si los otros involucrados poseen Crash Guide puedes scanear el codigo QR para obtener sus datos.</string>
     <string name="send_sms">¿Deseas enviarle a tus contactos de emergencia un sms para indicarles que haz tenido un accidente?</string>
 
     <string name="contact_text">A continuación se muestran los contactos a los cuales se les enviará un SMS en caso de que ocurra un accidente.</string>
