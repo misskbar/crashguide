@@ -40,7 +40,8 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture1"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginVertical="20dp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
                     android:background="@drawable/edittext"
@@ -61,7 +62,7 @@
                     android:text="Frontal"
                     android:textColor="@color/black"
                     android:textSize="13sp"
-                    android:paddingBottom="20dp" />
+                    android:layout_marginBottom="20dp"/>
 
             </RelativeLayout>
             <RelativeLayout
@@ -72,9 +73,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture2"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@drawable/edittext"
                     android:gravity="center_horizontal"
                     android:layout_centerVertical="true"
@@ -104,9 +106,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture3"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@drawable/edittext"
                     android:gravity="center_horizontal"
                     android:layout_centerVertical="true"
@@ -144,9 +147,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture4"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@drawable/edittext"
                     android:gravity="center_horizontal"
                     android:layout_centerVertical="true"
@@ -176,9 +180,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture5"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@drawable/edittext"
                     android:gravity="center_horizontal"
                     android:layout_centerVertical="true"
@@ -208,9 +213,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture6"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@drawable/edittext"
                     android:gravity="center_horizontal"
                     android:layout_centerVertical="true"
@@ -249,9 +255,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture7"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@drawable/edittext"
                     android:gravity="center_horizontal"
                     android:layout_centerVertical="true"
@@ -283,9 +290,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture8"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="5dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@drawable/edittext"
                     android:gravity="center_horizontal"
                     android:layout_centerVertical="true"
@@ -315,9 +323,10 @@
                 <com.facebook.drawee.view.SimpleDraweeView
                     android:id="@+id/Capture9"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="5dp"
                     android:layout_marginRight="10dp"
+                    android:layout_marginVertical="20dp"
                     android:background="@drawable/edittext"
                     android:gravity="center_horizontal"
                     android:layout_centerVertical="true"
