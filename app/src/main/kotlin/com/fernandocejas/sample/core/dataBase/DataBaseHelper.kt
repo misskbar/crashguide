@@ -258,7 +258,7 @@ class DataBaseHelper(context: Context) : SQLiteOpenHelper(context, DataBaseHelpe
                 usuario.nombres = cursor.getString(cursor.getColumnIndex(NOMBRES))
                 usuario.apellidos = cursor.getString(cursor.getColumnIndex(APELLIDOS))
                 usuario.rut = cursor.getString(cursor.getColumnIndex(RUT))
-                usuario.telefono = cursor.getInt(cursor.getColumnIndex(TELEFONO))
+                usuario.telefono = cursor.getString(cursor.getColumnIndex(TELEFONO))
                 usuario.correo = cursor.getString(cursor.getColumnIndex(CORREO))
                 usuario.seguro = cursor.getString(cursor.getColumnIndex(SEGURO))
                 usuario.fotoCarnet = cursor.getString(cursor.getColumnIndex(FOTOCARNET))

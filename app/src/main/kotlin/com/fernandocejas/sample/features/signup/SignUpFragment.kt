@@ -310,7 +310,7 @@ class SignUpFragment : BaseFragment(), View.OnClickListener {
                 firstName.text.toString(),
                 surname.text.toString(),
                 rut.text.toString(),
-                telefono.text.toString().toInt(),
+                telefono.text.toString(),
                 email.text.toString(),
                 spinner.selectedItem.toString(),
                 idPath,
