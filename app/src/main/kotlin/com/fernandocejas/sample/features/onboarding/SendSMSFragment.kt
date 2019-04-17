@@ -42,10 +42,14 @@ class SendSMSFragment : BaseFragment() {
 
         dbHandler = DataBaseHelper(context!!)
 
-        possitiveButton.setOnClickListener(View.OnClickListener {
+        requestSmsPermission()
 
+        possitiveButton.setOnClickListener(View.OnClickListener {
             requestSmsPermission()
-            navigator.showMap(activity!!)
+
+            sendSms()
+
+
  })
 
         negativeButton.setOnClickListener(View.OnClickListener { v -> navigator.showMap(activity!!) })
@@ -64,7 +68,7 @@ class SendSMSFragment : BaseFragment() {
                     PERMISSION_SEND_SMS)
         } else {
             // permission already granted run sms send
-            sendSms()
+//            sendSms()
         }
     }
 
@@ -74,7 +78,7 @@ class SendSMSFragment : BaseFragment() {
 
                 if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // permission was granted
-                    sendSms()
+//                    sendSms()
                 } else {
                     // permission denied
                 }
@@ -94,6 +98,8 @@ class SendSMSFragment : BaseFragment() {
 
             Toast.makeText(activity!!, "Mensaje enviado",
                     Toast.LENGTH_LONG).show()
+
+            navigator.showMap(activity!!)
         } catch (ex: Exception) {
             Toast.makeText(activity!!, ex.message.toString(),
                     Toast.LENGTH_LONG).show()
